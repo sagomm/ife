@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>零基础html编码(二)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul{
+            list-style: none;
+        }
+        body{
+            background-color: #DEDEDE;
+        }
+        header{
+            height: 50px;
+            background-color: #333333;
+            padding: 10px;
+            width: 100%;
+        }
+        header img{
+            height: 100%;
+        }
+        header nav{
+            float: right;
+            line-height: 50px;
+            height: 100%;
+        }
+        header nav li{
+            float: right;
+            margin-left: 30px;
+        }
+
+        header a:link,header a:visited,header a:hover,header a:active{    
+            color: white;
+        }
+        article,aside{
+            background-color: white;
+            margin: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px gray;
+            padding: 30px 20px;
+        }
+        article > h2{
+            color: black;            
+        }   
+        section > h2{
+           font-size: 20px;
+           color: #aaa;
+           margin: 10px auto;
+        }
+        article .actInfo{
+            margin:7px auto;
+            font-size: 15px;
+            color: #ccc;
+        }
+        article .artBody{
+            text-indent: 2em;
+        }
+        article ul,article ol{
+            margin: 30px 30px;
+        }
+        article .picture{
+            margin: 30px 30px;
+            border: 1px solid #ccc; 
+            width: 200px;
+            padding : 10px;
+            text-align:  center;
+        }
+        article .picture img{
+            margin-top:  10px;
+            width :100%;
+        }
+        article table, article table td{
+            border: 1px solid #ccc;
+            padding :2px;    
+
+        }
+        article table{
+            width :100%;
+            border-collapse:collapse;   
+        }
+        article thead td{
+            background-color: brown;
+        }
+        article tbody tr:last-child{
+            background-color: #ccc;
+        }
+        aside > h2{
+            padding: 10px 10px;
+            border-left: 4px solid #ccc;
+            font-size: 20px;
+        }
+        form {
+            width: 100%;
+            margin-bottom: 10px;                   
+        }
+        form .form-msg{
+            width: 40%;
+            text-align: right;
+            display: inline-block;
+            vertical-align: top;   
+        }
+        form >div{
+            margin-top: 20px;
+        }
+        form .form-info{    
+            text-indent: 39%;
+            color: #ccc;
+            font-size: 15px;
+            margin: 10px;
+            
+        }
+        form button{
+            margin-top: 20px;
+            width: 100%;
+            background: #3355D0;
+            height: 40px;
+        }
+        form textarea{
+           width :40%;
+           height: 70px;
+        }
+        footer{
+            width: 100%;
+            background: black;
+            
+        }
+        </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="http://www.qqya.com/userimg/10041/130402161P2.jpg" alt="logo">
+        <nav>
+            <ul>
+                <li><a href="#">你猜我是链接几</a></li>
+                <li><a href="#">我是链接三</a></li>
+                <li><a href="#">我是链接二</a></li>
+                <li><a href="#">我是链接一</a></li>
+            </ul>            
+        </nav>
+    </header>
+    <article>
+        <h2>我是文章一级标题</h2>
+        <section>
+            <h2>我是文章二级标题</h2>
+            <p class="actInfo">
+            文章作者
+            文章发表时间
+            </p>
+            <p class="artBody">
+                这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落</br>换行了
+                这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,换行了</br>
+                这是一个很很长长的段落,这是一个很很长长的段落,<a href="http://ife.baidu.com/">这里有个链接到http://ife.baidu.com/</a>这是一个很很长长的段落,这是一个很很长长的段落,<strong>这里有个粗体字</strong>这是一个很长很长的段落..................................................................
+                落
+            </p>
+            <img src="http://www.zjumpa.cn/upload/diwutao/20130111160313.jpg" alt="图片">            
+        </section>
+    </article>
+    <article>
+        <h2>我是章文一级标题</h2>
+        <section>
+            <h2>我是章文二级标题</h2>
+            <p class="actInfo">
+            文章作者
+            文章发表时间
+            </p>
+            <p class="artBody">这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,我要换行了
+我真的要换行了</br>
+这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落</br>
+这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,这是一个很很长长的段落,我下面有个链接<br>
+一个<a href="#"><strong>粗体字链接</strong></a></p>
+            <div>
+                <img src="http://hongdoubaoadmin.gotoip4.com/wp-content/uploads/2012/12/10168294.jpg" alt="图片">
+            </div>
+            <ul>
+                <li>列表项目一</li>
+                <li>列表项目二</li>
+                <li>列表项目三</li>
+            </ul>
+        </section>
+    </article>
+    <article>
+        <h2>图片</h2>
+        <div class="picture">
+            <p>你看</p>
+            <img src="http://hongdoubaoadmin.gotoip4.com/wp-content/uploads/2012/12/10168294.jpg" alt="图片">            
+        </div>
+        <div class="picture">
+            <p>你看</p>
+            <img src="http://hongdoubaoadmin.gotoip4.com/wp-content/uploads/2012/12/10168294.jpg" alt="图片">            
+        </div>
+        <div class="picture">
+            <p>你看</p>
+            <img src="http://hongdoubaoadmin.gotoip4.com/wp-content/uploads/2012/12/10168294.jpg" alt="图片">            
+        </div>
+    </article>
+    <article>
+        <h2>最后一篇文章</h2>
+        <section>
+            <h2>我是二级标题</h2>
+            <p class="actInfo">
+            文章作者
+            文章发表时间
+            </p>
+            <ol>
+                <li>排名一</li>
+                <li>排名二</li>
+                <li>排名三</li>
+            </ol>
+            <p>下面是什么自己看</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>表头</td>
+                        <td>表头</td>
+                        <td>表头</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>表内单元格内容</td>
+                        <td>表内单元格内容</td>
+                        <td><a href="#">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>表内单元格内容</td>
+                        <td>表内单元格内容</td>
+                        <td><a href="#">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>表内单元格内容</td>
+                        <td>表内单元格内容</td>
+                        <td><a href="#">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>总计</td>
+                        <td colspan="2">3块钱</td>
+                    </tr>                
+                </tbody>
+            </table>            
+        </section>
+    </article>
+    <aside>
+        <h2>这以后是一个侧栏,这是侧栏的标题</h2>
+        <form action="#">
+            <div>
+                <label for="email" class="form-msg">请输入邮箱地址：</label><input type="email" name="email"  placeholder="这是一个文本输入框">
+                <p class="form-info">邮箱地址请按要求格式输入</p>                
+            </div>
+            <div>
+                <label for="password" class="form-msg">请输入密码：</label><input type="password" name="password" placeholder="这是一个文本输入框">
+            </div>
+            <div>
+                <label for="r-password" class="form-msg">请再次输入密码：</label><input type="password" name="r-password" placeholder="这是一个文本输入框">
+                <p class="form-info">密码请为<strong>6-16</strong>位英文数字</p>                
+            </div>
+            <div>
+                <label for="sex" class="form-msg">性别：</label><input type="radio"  name="sex" value="男" checked><label for="man">男 </label><input type="radio" name="sex" value="女"><label for="woman">女</label>
+            </div>
+            <div>
+                <label for="city" class="form-msg">城市：</label>
+                <select name="city" >
+                    <option selected="selected">北京</option>
+                    <option >上海</option>
+                    <option >广州</option>
+                </select>                
+            </div>
+            <div>
+                <label for="habbit" class="form-msg">爱好：</label>
+                <input   type="checkbox" name="habbit" value="运动">运动
+                <input   type="checkbox" name="habbit" value="艺术">艺术
+                <input   type="checkbox" name="habbit" value="科学">科学
+            </div>
+            <div>
+                <label for="profile" class="form-msg">个人描述：</label>
+                <textarea class="form-input" name="profile"  placeholder="请输入您的个人描述"></textarea>
+            </div>
+            
+            <label for="submit"></label>
+            <button name="submit" type="submit">确认提交</button>
+        </form>
+    </aside>
+    <footer>
+       <p>版权所有&#169</p> 
+    </footer>
+</body>
+</html>
