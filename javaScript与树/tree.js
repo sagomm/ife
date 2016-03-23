@@ -31,35 +31,33 @@
      * 中序遍历
      */
     domTree.prototype.iorTravel = function(){
-        var This = this;
         (function _iorTravel(node){
             if(node){
                 var child = [];
                 for(var i = 0 ; i < node.childNodes.length ;i++){
-                    if(node.childNodes[i].nodeName == This.nodeType.toUpperCase()){
+                    if(node.childNodes[i].nodeName == this.nodeType.toUpperCase()){
                         child.push(node.childNodes[i]);
                     }
                 }
                 if(child[0]){
                     _iorTravel(child[0]);
                 }
-                This.iorArr.push(node);
+                this.iorArr.push(node);
                 if(child[1]){
                     _iorTravel(child[1]);
                 }
             }
-        })(this.root);
+        }.bind(this))(this.root);
     }
     /** 
      * 后序遍历
      */
-    domTree.prototype.lorTravel = function(){
-        var This = this;        
+    domTree.prototype.lorTravel = function(){      
         (function _lorTravel(node){
             if(node){
                 var child = [];
                 for(var i = 0;i<node.childNodes.length;i++){
-                    if(node.childNodes[i].nodeName == This.nodeType.toUpperCase()){
+                    if(node.childNodes[i].nodeName == this.nodeType.toUpperCase()){
                         child.push(node.childNodes[i]);
                     }
                 };
@@ -70,7 +68,7 @@
                 if(child[1]){
                     _lorTravel(child[1]);    
                 }
-                This.lorArr.push(node);
+                this.lorArr.push(node);
             }
-        })(this.root);
+        }.bind(this))(this.root);
     }   
