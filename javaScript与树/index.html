@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 50%;
+        }
+        div{
+            box-sizing: border-box;
+            border: 1px black solid;
+            display: flex;
+
+            justify-content: space-around;
+            align-items: center;
+            width: 30%;
+            height: 50%;
+
+        }
+        .red{
+            background-color: coral;
+
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<button id="pre">先序遍历</button>
+<button id="in">中序遍历</button>
+<button id="ldr">后序遍历</button>
+<script src="TreeMVC.js"></script>
+<script src="tree.js"></script>
+<script>
+    window.onload = function()
+    {
+        var dom = new domTree(document.getElementById('root'),'div');
+        
+        document.getElementById('pre').onclick = function(){
+            BSTree.controller.stop();
+            BSTree.controller.preStart(500,dom.getporArr());
+            
+        }
+        document.getElementById('in').onclick = function(){
+            BSTree.controller.stop();
+            BSTree.controller.inStart(500,dom.getiorArr());
+            
+        }
+        document.getElementById('ldr').onclick = function(){
+            BSTree.controller.stop();
+            BSTree.controller.preStart(500,dom.getlorArr());
+            
+        }
+    }
+    
+
+    
+</script>
+</body>
+
+</html>

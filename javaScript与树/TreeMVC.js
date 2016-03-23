@@ -17,12 +17,12 @@ BSTree.controller =
        BSTree.model.arr = arr;
        BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);
     },
-    inStart : function (params) {
+    inStart : function (t, arr) {
        BSTree.model.i = 0;
        BSTree.model.arr = arr;
        BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);        
     },
-    ldrStart : function (params) {
+    ldrStart : function (t, arr) {
        BSTree.model.i = 0;
        BSTree.model.arr = arr;
        BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);        
@@ -33,13 +33,23 @@ BSTree.controller =
      * @param i   迭代器控制
      * @param arr dom二叉树顺序
      */
+    stop: function () {
+        this.statu = 'stop';
+    },
+    statu : 'stop',
     run: function (t, i, arr) {
         if (i < arr.length) {
             BSTree.view.addAnimation(arr[i]);
+            var This = this;
+            this.statu = 'run';
             setTimeout(function () {
                 BSTree.view.removeAnimation(arr[i]);
                 i += 1;
-                BSTree.controller.run(t, i, arr);
+                if(This.statu == 'run'){
+                    BSTree.controller.run(t, i, arr);
+                }else if(This.statu == 'stop'){
+                    BSTree.view.removeAnimation(arr[i]);    
+                }
             }, t)
         }
     }
