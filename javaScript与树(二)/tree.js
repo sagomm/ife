@@ -29,7 +29,7 @@ function Tree(){
 Tree.prototype.constructor = 'Tree';
 Tree.prototype.addNode = function (node,parent){
     if(parent && node){
-        return parent.addChild(node);
+        return this.findNode(parent).addChild(node);
     }else{
         return false;
     }
@@ -37,14 +37,16 @@ Tree.prototype.addNode = function (node,parent){
 Tree.prototype.findNode = function (node) {
     
 }
-Tree.prototype.deleteTree = function (root) {
-    
+Tree.prototype.deleteNode = function (node) {
+    var _tree = 
 }
 Tree.prototype.DFT = function () {
-    return [];
+    
+    
 }
 Tree.prototype.BFT = function () {
-    return [];
+    
+    
 }
 Tree.prototype.getRoot = function () {
     return this.root;
