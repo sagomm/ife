@@ -51,10 +51,16 @@ Tree.prototype.deleteNode = function (node,parent) {
 }
 Tree.prototype.DFT = function () {
     
+    (function _DFT(){
+            
+    }.bind(this))(this.root);
     
 }
 Tree.prototype.BFT = function () {
     
+    (function _BFT(){
+            
+    }.bind(this))(this.root)
     
 }
 Tree.prototype.getRoot = function () {
