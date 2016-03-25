@@ -39,7 +39,12 @@ Tree.prototype.findNode = function (node) {
 }
 Tree.prototype.deleteNode = function (node,parent) {
     if(parent && node){
-        
+        var _index = parent.child.indexOf(node);
+        if(_index){
+            parent.child.splice(_index,1);
+        }else{
+            return false;
+        } 
     }else{
         return false;
     }             
