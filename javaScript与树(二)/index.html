@@ -50,29 +50,29 @@
 <button id="pre">先序遍历</button>
 <button id="in">中序遍历</button>
 <button id="ldr">后序遍历</button>
-<script src="TreeMVC.js"></script>
+<!--<script src="TreeMVC.js"></script>-->
 <script src="tree.js"></script>
 <script>
-    window.onload = function()
-    {
-        var dom = new domTree(document.getElementById('root'),'div');
+    // window.onload = function()
+    // {
+    //     var dom = new domTree(document.getElementById('root'),'div');
         
-        document.getElementById('pre').onclick = function(){
-            BSTree.controller.stop();
-            BSTree.controller.preStart(500,dom.getporArr());
+    //     document.getElementById('pre').onclick = function(){
+    //         BSTree.controller.stop();
+    //         BSTree.controller.preStart(500,dom.getporArr());
             
-        }
-        document.getElementById('in').onclick = function(){
-            BSTree.controller.stop();
-            BSTree.controller.inStart(500,dom.getiorArr());
+    //     }
+    //     document.getElementById('in').onclick = function(){
+    //         BSTree.controller.stop();
+    //         BSTree.controller.inStart(500,dom.getiorArr());
             
-        }
-        document.getElementById('ldr').onclick = function(){
-            BSTree.controller.stop();
-            BSTree.controller.preStart(500,dom.getlorArr());
+    //     }
+    //     document.getElementById('ldr').onclick = function(){
+    //         BSTree.controller.stop();
+    //         BSTree.controller.preStart(500,dom.getlorArr());
             
-        }
-    }
+    //     }
+    // }
     
 
     

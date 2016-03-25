@@ -1,6 +1,6 @@
 function Node(value,parent){
-    this.value = value || NULL;
-    this.parent = parent || NULL;        
+    this.value = value || null;
+    this.parent = parent || null;        
     this.child = [];  
 }
 Node.prototype.constructor = 'Node';
@@ -22,21 +22,26 @@ Node.prototype.getChilds = function(){
 }
 
 
-function Tree(){
-    this.root;
-    this.total;
+function Tree(node){
+    this.root = node || null;
+    this.total = 0;
 }
 Tree.prototype.constructor = 'Tree';
 Tree.prototype.addNode = function (node,parent){
     if(parent && node){
-        return this.findNode(parent).addChild(node);
+        var _par = this.findNode(parent);
+        if(this.findNode(parent).addChild(node)){
+            total += 1;
+        }else{
+            return false;
+        };
     }else{
         return false;
     }
 }
 Tree.prototype.findNode = function (node) {
     var res = false;
-    res =  this.prototype.BF(function(_node){
+    res =  this.BF(function(_node){
         if(node === _node){
            res =  true;         
         }    
@@ -81,3 +86,13 @@ Tree.prototype.BF = function (callback){
 Tree.prototype.getRoot = function () {
     return this.root || false;
 }
+
+var n = new Node('w');
+var t = new Tree(n);
+
+t.addNode('a',n);
+t.addNode('a',n);
+
+t.Bf(function(node){
+    console.log(node);
+})
