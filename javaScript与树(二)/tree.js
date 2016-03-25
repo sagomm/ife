@@ -49,20 +49,28 @@ Tree.prototype.deleteNode = function (node,parent) {
         return false;
     }             
 }
-Tree.prototype.DFT = function () {
-    
-    (function _DFT(root){
-        
-            
-    }.bind(this))(this.root);
-    
+Tree.prototype.DF = function (callback) {
+    (function _DF(root){
+        if(root){
+            for(var i = 0 ;i < root.child.length;i++){
+                _DF(root.child[i]); 
+            }
+            callback(root);                        
+        }
+    })(this.root);
 }
-Tree.prototype.BFT = function () {
-    
-    (function _BFT(){
-                
-    }.bind(this))(this.root);
-    
+Tree.prototype.BF = function (callback){
+    var _queue = [];
+    if(this.root){
+        _queue.push(root);
+        while(_queue.length){
+            (function(node){
+                for(var i = 0;i<node.child.length;i++){
+                    
+                }    
+            })(this.root)
+        }
+    }  
 }
 Tree.prototype.getRoot = function () {
     return this.root || false;
