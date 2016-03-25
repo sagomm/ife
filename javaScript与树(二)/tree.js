@@ -51,7 +51,8 @@ Tree.prototype.deleteNode = function (node,parent) {
 }
 Tree.prototype.DFT = function () {
     
-    (function _DFT(){
+    (function _DFT(root){
+        
             
     }.bind(this))(this.root);
     
@@ -59,8 +60,8 @@ Tree.prototype.DFT = function () {
 Tree.prototype.BFT = function () {
     
     (function _BFT(){
-            
-    }.bind(this))(this.root)
+                
+    }.bind(this))(this.root);
     
 }
 Tree.prototype.getRoot = function () {
