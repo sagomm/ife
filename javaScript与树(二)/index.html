@@ -5,77 +5,74 @@
     <title>Title</title>
     <style>
         html,body{
-            height: 50%;
+            height: 100%;
+        }
+        .root{
+            height: 300px !important;
+            width: 1000px !important;
+            
         }
         div{
-            box-sizing: border-box;
             border: 1px black solid;
             display: flex;
-
+            padding: 5px;
             justify-content: space-around;
-            align-items: center;
+            align-items: center;    
             width: 30%;
-            height: 50%;
-
+            height: 60%;
         }
         .red{
             background-color: coral;
-
         }
     </style>
 </head>
 <body>
-<div id="root">
-    <div>
-        <div>
-            <div></div>
-            <div></div>
+<div id="root" class="root">
+    <span>A</span>
+    <div><span>B</span>
+        <div><span>C</span>
+            <div><span>D</span></div>
+            <div><span>E</span></div>
         </div>
-        <div>
-            <div></div>
-            <div></div>
+        <div><span>F</span>
+            <div><span>G</span></div>
+            <div><span>H</span></div>
         </div>
     </div>
-    <div>
-        <div>
-            <div></div>
-            <div></div>
+    <div><span>I</span>
+        <div><span>J</span>
+            <div><span>K</span></div>
+            <div><span>L</span></div>
         </div>
-        <div>
-            <div></div>
-            <div></div>
+        <div><span>M</span>
+            <div><span>N</span></div>
+            <div><span>O</span></div>
         </div>
+    </div>
+    <div><span>P</span>
+        <div><span>Q</span></div>
+        <div><span>R</span></div>
+        <div><span>S</span></div>
+    </div>
+    <div><span>T</span>
+        <div><span>H</span></div>
+        <div><span>I</span></div>
+        <div><span>J</span></div>
     </div>
 </div>
-<button id="pre">先序遍历</button>
-<button id="in">中序遍历</button>
-<button id="ldr">后序遍历</button>
+
+<button class="BFT">深度优先遍历</button>
+<button class="DFT">宽度优先遍历</button>
+<button class="search">查找</button>
+<input type="text" placeholder="请输入查找的字符">
 <!--<script src="TreeMVC.js"></script>-->
 <script src="tree.js"></script>
+<srcipt src=""></srcipt>
+<srcipt src="main.js"></srcipt>
 <script>
     // window.onload = function()
-    // {
-    //     var dom = new domTree(document.getElementById('root'),'div');
-        
-    //     document.getElementById('pre').onclick = function(){
-    //         BSTree.controller.stop();
-    //         BSTree.controller.preStart(500,dom.getporArr());
-            
-    //     }
-    //     document.getElementById('in').onclick = function(){
-    //         BSTree.controller.stop();
-    //         BSTree.controller.inStart(500,dom.getiorArr());
-            
-    //     }
-    //     document.getElementById('ldr').onclick = function(){
-    //         BSTree.controller.stop();
-    //         BSTree.controller.preStart(500,dom.getlorArr());
-            
-    //     }
+    
     // }
-    
-
-    
 </script>
 </body>
 
