@@ -37,8 +37,12 @@ Tree.prototype.addNode = function (node,parent){
 Tree.prototype.findNode = function (node) {
     
 }
-Tree.prototype.deleteNode = function (node) {
-    var _tree = 
+Tree.prototype.deleteNode = function (node,parent) {
+    if(parent && node){
+        
+    }else{
+        return false;
+    }             
 }
 Tree.prototype.DFT = function () {
     
@@ -49,5 +53,5 @@ Tree.prototype.BFT = function () {
     
 }
 Tree.prototype.getRoot = function () {
-    return this.root;
+    return this.root || false;
 }
