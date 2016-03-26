@@ -1,7 +1,7 @@
 var app = {
 }
 app.init = function () {
-    this.controller.init();
+    
 
 }
 app.controller = {
@@ -29,7 +29,21 @@ app.model = {
     }
 }
 app.view = {
-    
+    domNode : function (dom,value) {
+        this.value;
+        this.dom;      
+    },
+    domNodes : [],
+    getNodeRoot : function () {
+        return document.getElementById('root');
+    },
+    getNodes : function () {
+        var nodes = document.getElementsByTagName('div');
+        for(var i = 0;i<nodes.length;i++){
+            this.domNodes.push(new domNode());            
+        }
+                    
+    }
 }
 
 
