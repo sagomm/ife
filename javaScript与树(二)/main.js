@@ -1,30 +1,24 @@
-
-
-
-
-
-
 var app = {
 }
 app.init = function () {
         
 }
 app.controller = {
-    BST = function () {
-            
+    BST = function (callback) {
+
     },
-    DST = function () {
-        
+    DST = function (callback) {
+
     },
-    search = function () {
+    search = function (node) {
         
-    }   
+    }
 }
 app.model = {
     
 }
 app.view = {
-    
+
 }
 
 
@@ -39,7 +33,7 @@ BSTree.model =
     i: 0,
     preArr: [],
     inArr: [],
-    ldrArr: []    
+    ldrArr: []
 };
 BSTree.controller =
 {
@@ -52,12 +46,12 @@ BSTree.controller =
     inStart : function (t, arr) {
        BSTree.model.i = 0;
        BSTree.model.arr = arr;
-       BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);        
+       BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);
     },
     ldrStart : function (t, arr) {
        BSTree.model.i = 0;
        BSTree.model.arr = arr;
-       BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);        
+       BSTree.controller.run(t,BSTree.model.i,BSTree.model.arr);
     },
     /**
      *
@@ -80,7 +74,7 @@ BSTree.controller =
                 if(This.statu == 'run'){
                     BSTree.controller.run(t, i, arr);
                 }else if(This.statu == 'stop'){
-                    BSTree.view.removeAnimation(arr[i]);    
+                    BSTree.view.removeAnimation(arr[i]);
                 }
             }, t)
         }
