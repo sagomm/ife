@@ -17,16 +17,16 @@ app.controller = {
 }
 app.model = {
 
-    domTree  = new Tree(),
     add = function (node) {
-
+            
     },
     dst = function () {
-
+        
     },
     bst = function () {
-
+        
     }
+    
 }
 app.view = {
     domNode : function (dom,value) {
@@ -40,9 +40,8 @@ app.view = {
     getNodes : function () {
         var nodes = document.getElementsByTagName('div');
         for(var i = 0;i<nodes.length;i++){
-            this.domNodes.push(new domNode());            
+            this.domNodes.push(new domNode(nodes[i]),nodes[i].getElementsByTagName("span").innerHTML);            
         }
-                    
     }
 }
 
