@@ -2,12 +2,9 @@ var app = {
 }
 app.init = function () {
     this.controller.init();
-    
+
 }
 app.controller = {
-    init =function (params) {
-        
-    },
     BST = function (callback) {
 
     },
@@ -15,19 +12,20 @@ app.controller = {
 
     },
     search = function (node) {
-        
+
     }
 }
 app.model = {
-    tree  = new Tree(),
+
+    domTree  = new Tree(),
     add = function (node) {
-                
+
     },
     dst = function () {
-        
+
     },
     bst = function () {
-            
+
     }
 }
 app.view = {
