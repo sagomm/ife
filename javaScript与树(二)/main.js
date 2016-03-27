@@ -10,7 +10,18 @@ app.controller = function (model,view) {
   this.view = view;
 }
 app.controller.prototype.init = function(){
-
+  function domNode(node,value){
+    this.node = node;
+    this.value = value;
+  }
+  var root = document.getElementById('root');
+  var nodes = root.getElementsByTagName('div');
+  var domNodes = [];
+  for (var i=0;i<nodes.length;i++){
+      domNodes.push(new app.domNode(nodes[i],nodes[i].getElementsByTagName('span')[0].innerHTML));
+  }
+  domNodes.splice(0,0,new app.domNode(root,root.getElementsByTagName('span')[0].innerHTML));
+  this.model.set(domNodes);
 }
 
 app.model = function (view){
