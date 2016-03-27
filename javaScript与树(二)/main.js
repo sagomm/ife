@@ -5,11 +5,14 @@ app.init = function () {
     var controller = new app.controller(view,model);
     controller.init();
 }
-app.controller = function (model,view) {
+app.Event = function (){
+
+}
+app.Controller = function (model,view) {
   this.model = model;
   this.view = view;
 }
-app.controller.prototype.init = function(){
+app.Controller.prototype.init = function(){
   function domNode(node,value){
     this.node = node;
     this.value = value;
@@ -24,28 +27,26 @@ app.controller.prototype.init = function(){
   this.model.set(domNodes);
 }
 
-app.model = function (view){
-    var tree = new Tree();
+app.Model = function (view){
+    this.tree = new Tree();
+}
+app.Model.prototype = {
+  constructor : 'app.model',
+  set : function(){
 
+  },
+  get : function(){
+
+  }
 }
 app.domNode = function (node,value) {
     this.node = node;
     this.value = value;
 }
-app.view = function () {}
 
-app.view.prototype = {
+app.View = function () {}
+app.View.prototype = {
     constructor : 'app.view',
-    getNodes : function () {
-        var root =  document.getElementById('root');
-        var nodes = root.getElementsByTagName('div');
-        var domNodes = [];
-        for (var i=0;i<nodes.length;i++){
-            domNodes.push(new app.domNode(nodes[i],nodes[i].getElementsByTagName('span')[0].innerHTML));
-        }
-        domNodes.splice(0,0,new app.domNode(root,root.getElementsByTagName('span')[0].innerHTML));
-        return domNodes;
-    },
     addAni : function (node){
         animation.addAni(node,'red');
     },
