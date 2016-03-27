@@ -1,23 +1,28 @@
 var app = {}
 app.init = function () {
     var view = new app.view();
-    // var model = new app.model();
-    // var controller = new app.controller();
-    
-        
+    var model = new app.model();
+    var controller = new app.controller(view,model);
+    controller.init();
 }
 app.controller = function (model,view) {
-    
+  this.model = model;
+  this.view = view;
 }
+app.controller.prototype.init = function(){
+
+}
+
 app.model = function (view){
     var tree = new Tree();
-    
+
 }
-app.view = function () {}
 app.domNode = function (node,value) {
     this.node = node;
     this.value = value;
 }
+app.view = function () {}
+
 app.view.prototype = {
     constructor : 'app.view',
     getNodes : function () {
@@ -28,7 +33,7 @@ app.view.prototype = {
             domNodes.push(new app.domNode(nodes[i],nodes[i].getElementsByTagName('span')[0].innerHTML));
         }
         domNodes.splice(0,0,new app.domNode(root,root.getElementsByTagName('span')[0].innerHTML));
-        return domNodes;    
+        return domNodes;
     },
     addAni : function (node){
         animation.addAni(node,'red');
