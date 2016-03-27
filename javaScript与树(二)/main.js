@@ -9,7 +9,7 @@ app.init = function () {
 app.controller = function (model,view) {
     
 }
-app.model = function (){
+app.model = function (view){
     var tree = new Tree();
     
 }
