@@ -1,46 +1,37 @@
-var app = {
-}
+var app = {}
 app.init = function () {
+    var view = new app.view();
+    // var model = new app.model();
+    // var controller = new app.controller();
     
-
-}
-app.controller = {
-    BST = function (callback) {
-             
-    },
-    DST = function (callback) {
-
-    },
-    search = function (node) {
-
-    }
-}
-app.model = {
-
-    add = function (node) {
-            
-    },
-    dst = function () {
         
-    },
-    bst = function () {
-        
-    }
+}
+app.controller = function () {
     
 }
-app.view = {
-    domNode : function (dom,value) {
-        this.value;
-        this.dom;      
-    },
-    domNodes : [],
-    getNodeRoot : function () {
-        return document.getElementById('root');
-    },
+app.model = function (){
+    
+}
+app.view = function () {    
+}
+app.domNode = function (node,value) {
+    this.node = node;
+    this.value = value;
+}
+app.view.prototype = {
+    constructor : 'app.view',
     getNodes : function () {
-        var nodes = document.getElementsByTagName('div');
-        for(var i = 0;i<nodes.length;i++){
-            this.domNodes.push(new domNode(nodes[i]),nodes[i].getElementsByTagName("span").innerHTML);            
-        }
+        var nodes = document.getElementById('div').getElementsByTagName('div');
+        var domNodes = [];
+        for (var i=0;i<nodes.length;i++){
+            domNodes.push(new app.domNode(nodes[i],nodes[i].getElementsByTagName('span')[0].innerHTML));
+        }    
+    },
+    addAni : function (node){
+        animation.addAni(node,'red');
+    },
+    delAni : function (node) {
+        animation.removeAni(node,'red');
     }
 }
+
