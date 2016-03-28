@@ -5,12 +5,13 @@ app.init = function () {
     var controller = new app.controller(view,model);
     controller.init();
 }
+//
 app.Event = function (observer){
   this.observer = observer;
   this.listeners = [];
 }
 app.Event.prototype = {
-  constructor : 'Event',
+  constructor : 'app.Event',
   attach : function (listener) {
     this.listeners.push(listener);
   },
@@ -51,6 +52,12 @@ app.Model.prototype = {
 
   },
   get : function(){
+
+  },
+  addNode : function(node){
+
+  },
+  delNode : function(node){
 
   }
 }
