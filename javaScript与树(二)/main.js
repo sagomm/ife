@@ -1,7 +1,7 @@
 var app = {}
 app.init = function () {
-    var view = new app.view();
     var model = new app.model();
+    var view = new app.view(model);
     var controller = new app.controller(view,model);
     controller.init();
 }
@@ -33,23 +33,27 @@ app.Controller.prototype = {
       this.value = value;
     }
     var root = document.getElementById('root');
-    var nodes = root.getElementsByTagName('div');
-    var domNodes = [];
-    for (var i=0;i<nodes.length;i++){
-        domNodes.push(new app.domNode(nodes[i],nodes[i].getElementsByTagName('span')[0].innerHTML));
-    }
-    domNodes.splice(0,0,new app.domNode(root,root.getElementsByTagName('span')[0].innerHTML));
-    this.model.set(domNodes);
+    (function getNodes(root){
+      var TreeNode = new Node(new domNode(root,root.getElementsByTagName('span')[0].innerHTML));
+      this.model.addNode(TreeNode);
+      for (var i = 0;i< root.childNodes.length;i++){
+        if(root.childNodes[i].nodeName === 'DIV'){
 
-    document.getElementById('').onclick = function() {
+        }
+      }
+
+    }).bind(this)(root);
+
+
+    document.getElementById('BST').onclick = function() {
+      this.model.bst();
+    };
+    document.getElementById('DST').onclick = function() {
+      this.model.dst();
+    };
+    document.getElementById('search').onclick = function () {
 
     };
-    document.getElementById('').onclick = function() {
-
-    };
-    document.getElementById('').onclick = function () {
-
-    }
 
   }
 
@@ -57,9 +61,6 @@ app.Controller.prototype = {
 
 app.Model = function (view){
     this.tree = new Tree();
-    this.root = null;
-    this.event = new app.Event(this);
-    this.event.attach(view.node);
 }
 app.Model.prototype = {
   constructor : 'app.Model',
@@ -67,19 +68,27 @@ app.Model.prototype = {
     this.root = root;
   }
   addNode : function(node,parent){
-    this.event.notify(this);
-  },
-  delNode : function(node,parent){
-    this.event.notify(this);
-  }
 
+  },
+  bst : function(){
+
+  },
+  dst : function(){
+
+  }
+  search : function(root){
+
+  }
 }
 app.domNode = function (node,value) {
     this.node = node;
     this.value = value;
 }
 
-app.View = function () {}
+app.View = function (model) {
+  this.model = model;
+
+}
 app.View.prototype = {
     constructor : 'app.view',
     addAni : function (node){
@@ -87,11 +96,5 @@ app.View.prototype = {
     },
     delAni : function (node) {
         animation.removeAni(node,'red');
-    },
-    addNode : function (node){
-
-    },
-    delNode : function (node){
-
     }
 }
