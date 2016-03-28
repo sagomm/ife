@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>网格布局</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    html,body{
+      heigh: 100%;
+    }
+/* NOTE: for srceen > 768px */
+    .gird{
+      padding: 0 10%;
+    }
+    .row{
+      width: 100%;
+    }
+    .row:after,.row:before{
+      content: '';
+      display: table;
+      clear:both;
+    }
+    [class*='col-']{
+      box-sizing: border-box;
+      float: left;
+      padding: 20px;
+    }
+    .row .col-1{width: 8.33%;}
+    .row .col-2{width: 16.66%;}
+    .row .col-4{width: 33.33%;}
+    .row .col-6{width: 50%;}
+    .row .col-8{width: 66.66%;}
+/* NOTE: for screen < 768px */
+    @media screen and (max-width : 768px) {
+      .row .col-1{width: 16.66%;}
+      .row .col-2{width: 33.33%;}
+      .row .col-4{width: 100%;}
+      .row .col-6{width: 100%;}
+      .row .col-8{width: 100%;}
+    }
+
+
+    .unit{
+      border: 1px solid #999;
+      height: 50px;
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="gird">
+    <div class="row">
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+      <div class="col-1">
+        <div class="unit"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="unit"></div>
+      </div>
+      <div class="col-4">
+        <div class="unit"></div>
+      </div>
+      <div class="col-4">
+        <div class="unit"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="unit"></div>
+      </div>
+      <div class="col-4">
+        <div class="unit"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="unit"></div>
+      </div>
+      <div class="col-2">
+        <div class="unit"></div>
+      </div>
+      <dov class="col-1">
+        <div class="unit"></div>
+      </dov>
+    </div>
+  </div>
+</body>
+</html>
