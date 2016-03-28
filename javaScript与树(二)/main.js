@@ -66,7 +66,7 @@ app.Model.prototype = {
   constructor : 'app.Model',
   setRoot : function(root){
     this.root = root;
-  }
+  },
   addNode : function(node,parent){
 
   },
@@ -75,7 +75,7 @@ app.Model.prototype = {
   },
   dst : function(){
 
-  }
+  },
   search : function(root){
 
   }
