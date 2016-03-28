@@ -40,26 +40,39 @@ app.Controller.prototype = {
     }
     domNodes.splice(0,0,new app.domNode(root,root.getElementsByTagName('span')[0].innerHTML));
     this.model.set(domNodes);
+
+    document.getElementById('').onclick = function() {
+
+    };
+    document.getElementById('').onclick = function() {
+
+    };
+    document.getElementById('').onclick = function () {
+
+    }
+
   }
+
 }
 
 app.Model = function (view){
     this.tree = new Tree();
+    this.root = null;
+    this.event = new app.Event(this);
+    this.event.attach(view.node);
 }
 app.Model.prototype = {
-  constructor : 'app.model',
-  set : function(){
-
-  },
-  get : function(){
-
-  },
-  addNode : function(node){
-
-  },
-  delNode : function(node){
-
+  constructor : 'app.Model',
+  setRoot : function(root){
+    this.root = root;
   }
+  addNode : function(node,parent){
+    this.event.notify(this);
+  },
+  delNode : function(node,parent){
+    this.event.notify(this);
+  }
+
 }
 app.domNode = function (node,value) {
     this.node = node;
@@ -74,5 +87,11 @@ app.View.prototype = {
     },
     delAni : function (node) {
         animation.removeAni(node,'red');
+    },
+    addNode : function (node){
+
+    },
+    delNode : function (node){
+
     }
 }
