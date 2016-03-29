@@ -1,7 +1,7 @@
 function Node(value,parent){
     this.value = value || null;
-    this.parent = parent || null;        
-    this.child = [];  
+    this.parent = parent || null;
+    this.child = [];
 }
 Node.prototype.constructor = 'Node';
 Node.prototype.addChild = function (node) {
@@ -23,16 +23,16 @@ Node.prototype.getChilds = function(){
 
 
 function Tree(node){
-    this.root = node || null;
+    this.root = node;
     this.total = 0;
 }
 Tree.prototype.constructor = 'Tree';
-Tree.prototype.findNode = function (node) {
+Tree.prototype.findNode = function (node,callback) {
     var res = false;
     this.BF(function(_node){
         if(node === _node){
-           res =  true;         
-        }    
+           res =  true;
+        }
     });
     return res;
 }
@@ -55,34 +55,37 @@ Tree.prototype.deleteNode = function (node,parent) {
             parent.child.splice(_index,1);
         }else{
             return false;
-        } 
+        }
     }else{
         return false;
-    }             
+    }
 }
 Tree.prototype.DF = function (callback) {
     (function _DF(root){
         if(root){
             for(var i = 0 ;i < root.child.length;i++){
-                _DF(root.child[i]); 
+                _DF(root.child[i]);
             }
-            callback(root);                        
+            callback(root);
         }
     })(this.root);
 }
 Tree.prototype.BF = function (callback){
     var _queue = [];
     if(this.root){
-        _queue.push(this.root);   
+        _queue.push(this.root);
         while(_queue.length){
             var _node = _queue.pop();
             for(var i = 0;i<_node.child.length;i++){
                 _queue.push(_node.child[i]);
             }
-            callback(_node);    
-        }  
-    };        
+            callback(_node);
+        }
+    };
 }
 Tree.prototype.getRoot = function () {
-    return this.root || false;
+    return this.root;
+}
+Tree.prototype.setRoot = function (root) {
+    this.root = root;
 }
