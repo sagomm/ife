@@ -26,6 +26,7 @@ app.Controller = function (model,view) {
   this.view = view;
 }
 app.Controller.prototype = {
+//NOTE:tow
   constructor : 'app.Controller',
   init : function(){
     function domNode(node,value){
@@ -41,7 +42,8 @@ app.Controller.prototype = {
           this.model.addNode(new Node(new domNode(root.clildNodes[i],root.clildNodes[i].getElementsByTagName('span')[0].innerHTML)),_root);
           getNodes(root.childNodesp[i]);
       }
-    }).bind(this)(root);
+// NOTE: one
+    }.bind(this))(root);
     document.getElementById('BST').onclick = function() {
       this.model.bst();
     };
