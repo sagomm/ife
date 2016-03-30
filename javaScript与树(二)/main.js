@@ -5,12 +5,11 @@ app.init = function () {
     var controller = new app.controller(view,model);
     controller.init();
 }
-//
+// NOTE: three
 app.Event = function (observer){
   this.observer = observer;
   this.listeners = [];
 }
-// NOTE: three
 app.Event.prototype = {
   constructor : 'app.Event',
   attach : function (listener) {
@@ -27,7 +26,7 @@ app.Controller = function (model,view) {
   this.view = view;
 }
 app.Controller.prototype = {
-//NOTE:tow
+//NOTE:two
   constructor : 'app.Controller',
   init : function(){
     function domNode(node,value){
@@ -54,9 +53,7 @@ app.Controller.prototype = {
     document.getElementById('search').onclick = function () {
       this.model.search(document.getElementById('text').value);
     };
-
   }
-
 }
 
 app.Model = function (view){
@@ -86,7 +83,6 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
-
 }
 app.View.prototype = {
     constructor : 'app.view',
