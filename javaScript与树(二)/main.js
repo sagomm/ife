@@ -10,6 +10,7 @@ app.Event = function (observer){
   this.observer = observer;
   this.listeners = [];
 }
+// NOTE: three
 app.Event.prototype = {
   constructor : 'app.Event',
   attach : function (listener) {
