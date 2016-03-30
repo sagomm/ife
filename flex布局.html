@@ -6,12 +6,14 @@
   <style>
     *{
       margin: 0;
-      padding: 20px;
+      margin: 20px;
+      text-align: center;
     }
     .wrap{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #ccc;
     }
     [class*="box"]{
       background: #fD0;
@@ -31,8 +33,17 @@
     }
     @media screen and (max-width:640px) {
       .wrap{
-        align-items:flex-start;
-        flex-wrap: wrap-reverse;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        align-content: flex-start;
+
+        min-width: 580px;
+      }
+      .box4{
+        order: -1;
+      }
+      .box3{
+        align-self: flex-end;
       }
     }
   </style>
