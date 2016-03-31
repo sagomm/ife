@@ -58,6 +58,8 @@ app.Controller.prototype = {
 
 app.Model = function (){
     this.tree = new Tree();
+    this.bst = new Event(this);
+    this.dst = new Event(this);
 }
 app.Model.prototype = {
   constructor : 'app.Model',
@@ -83,6 +85,9 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
+  this.model.attach(function(node){
+    this.addAni(node);
+  }.bind(this));
 }
 app.View.prototype = {
     constructor : 'app.view',
@@ -91,5 +96,5 @@ app.View.prototype = {
     },
     delAni : function (node) {
         animation.removeAni(node,'red');
-    }
+    },
 }
