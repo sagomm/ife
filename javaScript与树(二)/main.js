@@ -56,7 +56,7 @@ app.Controller.prototype = {
   }
 }
 
-app.Model = function (view){
+app.Model = function (){
     this.tree = new Tree();
 }
 app.Model.prototype = {
