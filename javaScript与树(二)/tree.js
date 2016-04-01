@@ -1,6 +1,6 @@
 function Node(value,parent){
-    this.value = value || null;
-    this.parent = parent || null;
+    this.value = value;
+    this.parent = parent;
     this.child = [];
 }
 Node.prototype.constructor = 'Node';

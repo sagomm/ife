@@ -73,15 +73,28 @@ app.Model.prototype = {
     }
   }
   this.search = function(node){
-    return this.tree.search(node.node);
+    var res = false;
+    this.tree.DS = function(treeNode){
+      currentNode.notify(treeNode);
+      if(treeNode === node){
+        res = true;
+      }
+    }
   }
 }
 app.View = function (model) {
   this.model = model;
-  model.currentNode.attach(this.Ani());
+  model.currentNode.attach(this.showNode());
 }
 app.View.prototype = {
     constructor : 'app.view',
+    showNode : function(node){
+      var nodes = document.getElementById('root').getElementsByTagName('div');
+      for(var i = 0 ;i < nodes ;i++){
+        this.delAni(nodes);
+      }
+      this.addAni(node);
+    }
     addAni : function (node){
         animation.addAni(node,'red');
     },
