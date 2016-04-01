@@ -80,14 +80,17 @@ app.Model.prototype = {
     }
   },
   search : function(root){
-    this
+    
   }
 }
 app.View = function (model) {
   this.model = model;
-  this.model.attach(function(node){
+  this.model..attach(function(node){
     this.addAni(node);
   }.bind(this));
+  this.model.attach(function(node){
+    this.
+  })
 }
 app.View.prototype = {
     constructor : 'app.view',
