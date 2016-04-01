@@ -1,11 +1,9 @@
-var app = {
-
-}
-app.init = function () {
-    var model = new app.model();
-    var view = new app.view(model);
-    var controller = new app.controller(view,model);
-    controller.init();
+var app = {}
+app.init = function(){
+  var model = new app.model();
+  var view = new app.view(model);
+  var controller = new app.controller(view,model);
+  controller.init();
 }
 // NOTE: three
 app.Event = function (observer){
@@ -83,7 +81,7 @@ app.Model.prototype = {
   },
   search : function(root){
     this.tree.search(function(node){
-      
+
     });
   }
 }
