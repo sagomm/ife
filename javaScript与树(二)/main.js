@@ -1,4 +1,6 @@
-var app = {}
+var app = {
+
+}
 app.init = function () {
     var model = new app.model();
     var view = new app.view(model);
@@ -80,7 +82,9 @@ app.Model.prototype = {
     }
   },
   search : function(root){
-    
+    this.tree.search(function(node){
+      
+    });
   }
 }
 app.View = function (model) {
