@@ -1,8 +1,8 @@
 var app = {}
 app.init = function(){
   var model = new app.model();
-  var view = new app.view(model);
-  var controller = new app.controller(view,model);
+  var view = new app.view();
+  var controller = new app.controller();
   controller.init();
 }
 // NOTE: three
@@ -58,31 +58,19 @@ app.Controller.prototype = {
 
 app.Model = function (){
     this.tree = new Tree();
-    this.bst = new Event(this);
-    this.dst = new Event(this);
+    this.currentNode = new Event(this);
 }
 app.Model.prototype = {
-  constructor : 'app.Model',
-  setRoot : function(root){
-    this.tree.setRoot(root);
-  },
-  addNode : function(node,parent){
-    this.tree.addNode(node,parent);
-  },
-  bst : function(){
-    this.tree.BF(function(node){
-      node.node.addAni();
-    });
-  },
-  dst : function(){
-    this.tree.DF(function(node)){
-      node.node.removeAni();
+  constructor : 'Model',
+  this.bs = function(){
+    this.tree.BS = function (node) {
+      currentNode(node);
     }
   },
-  search : function(root){
-    this.tree.search(function(node){
-
-    });
+  this.ds = function(){
+    this.tree.DS = function(node){
+      currentNode(node);
+    }
   }
 }
 app.View = function (model) {
