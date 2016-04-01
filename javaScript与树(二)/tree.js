@@ -1,7 +1,7 @@
 function Node(value,parent){
     this.value = value;
-    this.parent = parent;
     this.child = [];
+    this.parent = parent;
 }
 Node.prototype.constructor = 'Node';
 Node.prototype.addChild = function (node) {
