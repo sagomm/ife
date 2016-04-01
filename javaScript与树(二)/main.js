@@ -64,23 +64,21 @@ app.Model.prototype = {
   constructor : 'Model',
   this.bs = function(){
     this.tree.BS = function (node) {
-      currentNode(node);
+      currentNode.notify(node);
     }
   },
   this.ds = function(){
     this.tree.DS = function(node){
-      currentNode(node);
+      currentNode.notify(node);
     }
+  }
+  this.search = function(node){
+    return this.tree.search(node.node);
   }
 }
 app.View = function (model) {
   this.model = model;
-  this.model..attach(function(node){
-    this.addAni(node);
-  }.bind(this));
-  this.model.attach(function(node){
-    this.
-  })
+  model.currentNode.attach(this.Ani());
 }
 app.View.prototype = {
     constructor : 'app.view',
