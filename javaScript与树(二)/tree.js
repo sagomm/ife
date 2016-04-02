@@ -15,7 +15,7 @@ Node.prototype.findChild = function (child){
     return this.child.indexOf(child) || false;
 }
 Node.prototype.getParent = function () {
-    return this.parent;
+    return this.parent || false;
 }
 Node.prototype.getChilds = function(){
     return this.child;
@@ -40,8 +40,10 @@ Tree.prototype.addNode = function (node,parent){
     if(parent && node){
         if(this.findNode(parent)){
             parent.addChild(node);
+            node.parent = parent;
             this.total += 1;
         }else{
+            console.log(1);
             return false;
         };
     }else{
@@ -76,7 +78,7 @@ Tree.prototype.BF = function (callback){
         _queue.push(this.root);
         while(_queue.length){
             var _node = _queue.pop();
-            for(var i = 0;i<_node.child.length;i++){
+            for(var i = _node.child.length-1;i >= 0;i--){
                 _queue.push(_node.child[i]);
             }
             callback(_node);

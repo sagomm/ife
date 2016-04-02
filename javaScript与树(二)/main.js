@@ -2,7 +2,7 @@ var app = {}
 app.init = function(){
   var model = new app.Model();
   var view = new app.View(model);
-  var controller = new app.Controller(view,model);
+  var controller = new app.Controller(model,view);
   controller.init();
 }
 
@@ -37,16 +37,19 @@ app.Controller.prototype = {
     var This = this;
     this.model.setRoot(new Node(new domNode(root,root.getElementsByTagName('span')[0].innerHTML)));
     (function getNodes(_root){
-      consloe.log(_root);
-      var TreeNode = new Node(new domNode(_root,root.getElementsByTagName('span')[0].innerHTML));
-      for (var i = 0;i< root.childNodes.length;i++){
-        if(root.childNodes[i].nodeName === 'DIV'){
-          This.model.addNode(new Node(new domNode(root.clildNodes[i],root.clildNodes[i].getElementsByTagName('span')[0].innerHTML)),_root);
-          getNodes(root.childNodesp[i]);
+      var TreeNode = new Node(new domNode(_root,_root.getElementsByTagName('span')[0].innerHTML));
+      for (var i = 0;i< _root.childNodes.length;i++){
+        if(_root.childNodes[i].nodeName === 'DIV'){
+          if(This.model.addNode(new Node(new domNode(_root.childNodes[i],_root.childNodes[i].getElementsByTagName('span')[0].innerHTML)),_root)){
+            getNodes(_root.childNodes[i]);
+          }else{
+            throw ('wrong');
+          };
+
       }
     }
     })(root);
-    consloe.log(this.model);
+    console.log(this.model.tree);
     // document.getElementById('BST').onclick = function() {
     //   this.model.bst();
     // };
@@ -67,6 +70,9 @@ app.Model.prototype = {
   constructor : 'app.Model',
   setRoot : function(treeNode){
     this.tree.setRoot(treeNode);
+  },
+  addNode : function(treeNode,parentNode){
+    return this.tree.addNode(treeNode,parentNode);
   },
   bs : function(){
     this.tree.BS = function (node) {
@@ -95,7 +101,7 @@ app.View = function (model) {
   this.model = model;
   var This = this;
   this.model.currentNodeChanged.attach(function(){
-    showNode(this.model.currentNode);
+    showNode(this.model.currentNode.node);
   });
 }
 app.View.prototype = {
@@ -105,7 +111,7 @@ app.View.prototype = {
       for(var i = 0 ;i < nodes ; i++){
         this.delAni(nodes[i]);
       }
-      this.addAni(node.node);
+      this.addAni(node);
     },
     addAni : function (node){
         animation.addAni(node,'red');
