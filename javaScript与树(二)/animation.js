@@ -1,7 +1,11 @@
 var animation = {}
-
 animation.hasAni = function (node,cls) {
-    node.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
+    console.log(node);
+    if(node.className && cls){
+      node.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    }else{
+      throw('node and cls cannot be undefined');
+    }
 }
 animation.addAni = function (node,cls) {
     if (!this.hasAni(node, cls)){
@@ -10,7 +14,7 @@ animation.addAni = function (node,cls) {
 }
 animation.removeAni = function (node,cls) {
     if (this.hasAni(node, cls)) {
-            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-            node.className = node.className.replace(reg, ' ');
+          var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+          node.className = node.className.replace(reg, ' ');
     }
 }

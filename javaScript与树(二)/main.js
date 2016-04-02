@@ -3,7 +3,6 @@ app.init = function(){
   var model = new app.Model();
   var view = new app.View(model);
   var controller = new app.Controller(view,model);
-  console.log(1);
   controller.init();
 }
 
@@ -91,7 +90,7 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
-  model.currentNode.attach(this.showNode());
+  model.currentNode.attach(this.showNode(this));
 }
 app.View.prototype = {
     constructor : 'app.view',
