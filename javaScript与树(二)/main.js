@@ -61,7 +61,8 @@ app.Controller.prototype = {
 }
 app.Model = function (){
     this.tree = new Tree();
-    this.currentNode = new Event(this);
+    this.currentNodeChanged = new Event(this);
+    this.currentNode  = null;
 }
 app.Model.prototype = {
   constructor : 'Model',
@@ -70,17 +71,20 @@ app.Model.prototype = {
   },
   bs : function(){
     this.tree.BS = function (node) {
-      currentNode.notify(node);
+      this.currentNode = node;
+      currentNodeChanged.notify(node);
     }
   },
   ds : function(){
     this.tree.DS = function(node){
-      currentNode.notify(node);
+      this.currentNode = node;
+      currentNodeChanged.notify(node);
     }
   },
   search : function(node){
     var res = false;
     this.tree.DS = function(treeNode){
+      this.currentNode = node;
       currentNode.notify(treeNode);
       if(treeNode === node){
         res = true;
@@ -90,16 +94,17 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
-  model.currentNode.attach(this.showNode());
+  var This = this;
+  this.model.currentNodeChanged.attach();
 }
 app.View.prototype = {
     constructor : 'app.view',
     showNode : function(node){
       var nodes = document.getElementById('root').getElementsByTagName('div');
-      for(var i = 0 ;i < nodes ;i++){
-        this.delAni(nodes);
+      for(var i = 0 ;i < nodes ; i++){
+        this.delAni(nodes[i]);
       }
-      this.addAni(node);
+      this.addAni(node.node);
     },
     addAni : function (node){
         animation.addAni(node,'red');
