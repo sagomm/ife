@@ -26,9 +26,8 @@ app.Controller = function (model,view) {
   this.model = model;
   this.view = view;
 }
-
 app.Controller.prototype = {
-  constructor : 'Controller',
+  constructor : 'app.Controller',
   init : function(){
     function domNode(node,value){
       this.node = node;
@@ -61,11 +60,11 @@ app.Controller.prototype = {
 }
 app.Model = function (){
     this.tree = new Tree();
-    this.currentNodeChanged = new Event(this);
+    this.currentNodeChanged = new app.Event(this);
     this.currentNode  = null;
 }
 app.Model.prototype = {
-  constructor : 'Model',
+  constructor : 'app.Model',
   setRoot : function(treeNode){
     this.tree.setRoot(treeNode);
   },
@@ -85,7 +84,7 @@ app.Model.prototype = {
     var res = false;
     this.tree.DS = function(treeNode){
       this.currentNode = node;
-      currentNode.notify(treeNode);
+      currentNodeChanged.notify(treeNode);
       if(treeNode === node){
         res = true;
       }
@@ -95,7 +94,9 @@ app.Model.prototype = {
 app.View = function (model) {
   this.model = model;
   var This = this;
-  this.model.currentNodeChanged.attach();
+  this.model.currentNodeChanged.attach(function(){
+    showNode(this.model.currentNode);
+  });
 }
 app.View.prototype = {
     constructor : 'app.view',
