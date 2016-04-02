@@ -30,8 +30,14 @@ Tree.prototype.constructor = 'Tree';
 Tree.prototype.findNode = function (node,callback) {
     var res = false;
     this.BF(function(_node){
+      console.log(node);
+      console.log(_node);
         if(node === _node){
+
            res =  true;
+        }
+        if(callback){
+          callback();
         }
     });
     return res;
@@ -43,7 +49,6 @@ Tree.prototype.addNode = function (node,parent){
             node.parent = parent;
             this.total += 1;
         }else{
-            console.log(1);
             return false;
         };
     }else{

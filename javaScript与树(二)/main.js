@@ -21,7 +21,6 @@ app.Event.prototype = {
     }
   }
 }
-
 app.Controller = function (model,view) {
   this.model = model;
   this.view = view;
@@ -29,27 +28,28 @@ app.Controller = function (model,view) {
 app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
-    function domNode(node,value){
-      this.node = node;
-      this.value = value;
-    }
     var root = document.getElementById('root');
     var This = this;
-    this.model.setRoot(new Node(new domNode(root,root.getElementsByTagName('span')[0].innerHTML)));
+    this.model.setRoot(new Node({
+      'node' : root,
+      'value': root.getElementsByTagName('span')[0].innerHTML
+    });
     (function getNodes(_root){
-      var TreeNode = new Node(new domNode(_root,_root.getElementsByTagName('span')[0].innerHTML));
       for (var i = 0;i< _root.childNodes.length;i++){
         if(_root.childNodes[i].nodeName === 'DIV'){
-          if(This.model.addNode(new Node(new domNode(_root.childNodes[i],_root.childNodes[i].getElementsByTagName('span')[0].innerHTML)),_root)){
+          var treeNode = new Node({
+            'node' : _root,
+            'value': root.getElementsByTagName('span')[0].innerHTML
+          });
+          if(This.model.addNode(treeNode,_root)){
             getNodes(_root.childNodes[i]);
           }else{
-            throw ('wrong');
+            // throw ('wrong');
           };
 
       }
     }
     })(root);
-    console.log(this.model.tree);
     // document.getElementById('BST').onclick = function() {
     //   this.model.bst();
     // };
