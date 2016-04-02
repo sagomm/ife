@@ -90,7 +90,7 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
-  model.currentNode.attach(this.showNode(this));
+  model.currentNode.attach(this.showNode());
 }
 app.View.prototype = {
     constructor : 'app.view',
