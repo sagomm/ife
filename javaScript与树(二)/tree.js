@@ -41,13 +41,15 @@ Tree.prototype.findNode = function (node,callback) {
 }
 Tree.prototype.addNode = function (node,parent){
     if(parent && node){
-        if(!this.findNode(parent)){
+        if(this.findNode(parent) && !(this.findNode(node))){
             parent.addChild(node);
             node.parent = parent;
             this.total += 1;
+            return true;
         }else{
             return false;
         };
+
     }else{
         return false;
     }

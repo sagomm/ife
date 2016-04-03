@@ -38,26 +38,17 @@ app.Controller.prototype = {
     var This = this;
     this.model.setRoot(root);
     (function getNodes(_root){
-      for (var i = 0;i< _root.node.childNodes.length;i++){
-        if(_root.node.childNodes[i].nodeName === 'DIV'){
-          var treeNode = new Node(new app.domNode(_root.node.childNodes[i],_root.node.childNodes[i].getElementsByTagName('span').innerHTML),_root);
+      for (var i = 0;i< _root.value.node.childNodes.length;i++){
+        if(_root.value.node.childNodes[i].nodeName === 'DIV'){
+          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span').innerHTML),_root);
           if(This.model.addNode(treeNode,_root)){
             getNodes(treeNode);
           }else{
-            throw ('wrong');
+            throw ('getNodes wrong');
           };
         }
     }
     })(root);
-    // document.getElementById('BST').onclick = function() {
-    //   this.model.bst();
-    // };
-    // document.getElementById('DST').onclick = function() {
-    //   this.model.dst();
-    // };
-    // document.getElementById('search').onclick = function () {
-    //   this.model.search(document.getElementById('text').value);
-    // };
   }
 }
 app.Model = function (){
