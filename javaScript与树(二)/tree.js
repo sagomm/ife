@@ -93,5 +93,7 @@ Tree.prototype.getRoot = function () {
     return this.root;
 }
 Tree.prototype.setRoot = function (root) {
-    this.root = root;
+    if(this.root = root){
+      this.total += 1;
+    }
 }

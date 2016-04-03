@@ -17,7 +17,7 @@ app.Event.prototype = {
   },
   notify : function (objs) {
     for(var i = 0 ; i < this.listeners.length;i++){
-      this.listener[i](this.observer,objs);
+      this.listeners[i](this.observer,objs);
     }
   }
 }
@@ -49,6 +49,7 @@ app.Controller.prototype = {
         }
     }
     })(root);
+    this.model.bs();
   }
 }
 app.Model = function (){
@@ -65,16 +66,16 @@ app.Model.prototype = {
     return this.tree.addNode(treeNode,parentNode);
   },
   bs : function(){
-    this.tree.BS = function (node) {
-      this.currentNode = node;
-      currentNodeChanged.notify(node);
-    }
+    this.tree.BF(function (node) {
+      this.currentNode = node.value.node;
+      this.currentNodeChanged.notify(this.currentNode);
+    }.bind(this))
   },
   ds : function(){
-    this.tree.DS = function(node){
+    this.tree.DF(function(node){
       this.currentNode = node;
       currentNodeChanged.notify(node);
-    }
+    })
   },
   search : function(node){
     var res = false;
@@ -91,14 +92,14 @@ app.View = function (model) {
   this.model = model;
   var This = this;
   this.model.currentNodeChanged.attach(function(){
-    showNode(this.model.currentNode.node);
-  });
+    this.showNode(this.model.currentNode.node);
+  }.bind(this));
 }
 app.View.prototype = {
     constructor : 'app.view',
     showNode : function(node){
       var nodes = document.getElementById('root').getElementsByTagName('div');
-      for(var i = 0 ;i < nodes ; i++){
+      for(var i = 0 ;i < nodes.length ; i++){
         this.delAni(nodes[i]);
       }
       this.addAni(node);
