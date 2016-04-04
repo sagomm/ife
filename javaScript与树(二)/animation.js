@@ -1,6 +1,8 @@
 var animation = {}
 animation.hasAni = function (node,cls) {
-    if(node.className && cls){
+    console.log(node);
+
+    if(node && cls){
       node.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
     }else{
       throw('node and cls cannot be undefined');

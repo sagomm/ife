@@ -3,7 +3,11 @@ app.init = function(){
   var model = new app.Model();
   var view = new app.View(model);
   var controller = new app.Controller(model,view);
-  controller.init();
+  try{
+      controller.init();
+  }catch(e){
+    console.log(e);
+  }
 }
 
 app.Event = function (observer){
