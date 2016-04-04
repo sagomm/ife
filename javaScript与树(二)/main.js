@@ -42,7 +42,6 @@ app.Controller.prototype = {
     var This = this;
     this.model.setRoot(root);
     (function getNodes(_root){
-      // console.log(_root);
       for (var i = 0;i< _root.value.node.childNodes.length-1;i++){
         if(_root.value.node.childNodes[i].nodeName === 'DIV'){
           var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span')[0].innerHTML),_root);
@@ -54,7 +53,9 @@ app.Controller.prototype = {
         }
     }
     })(root);
+
     this.model.bs();
+    console.log(this.model.currentNode);
   }
 }
 app.Model = function (){
@@ -96,20 +97,23 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
+  this.showQueue = [];
   var That = this;
-  this.model.currentNodeChanged.attach(function(){
-    That.showNode(That.model.currentNode.node);
+  this.model.currentNodeChanged.attach(function(model,node){
+    That.showQueue.push(node);
   });
 }
 app.View.prototype = {
     constructor : 'app.view',
     showNode : function(node){
-      console.log(node);
-      var nodes = document.getElementById('root').getElementsByTagName('div');
-      // for(var i = 0 ;i < nodes.length ; i++){
-      //   this.delAni(nodes[i]);
-      // }
-      this.addAni(node);
+      var That = this;
+      setTimeout(function(){
+        if(showQueue.length != 0){
+          setTimeout(function(){
+
+          },10)
+        }
+      },10)
     },
     addAni : function (node){
         animation.addAni(node,'red');
