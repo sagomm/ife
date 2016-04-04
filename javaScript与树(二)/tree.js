@@ -69,7 +69,7 @@ Tree.prototype.deleteNode = function (node,parent) {
 Tree.prototype.DF = function (callback) {
     (function _DF(root){
         if(root){
-            for(var i = 0 ;i < root.child.length;i++){
+            for(var i = 0;i < root.child.length-1;i++){
                 _DF(root.child[i]);
             }
             callback(root);
@@ -80,9 +80,9 @@ Tree.prototype.BF = function (callback){
     var _queue = [];
     if(this.root){
         _queue.push(this.root);
-        while(_queue.length){
-            var _node = _queue.pop();
-            for(var i = _node.child.length-1;i >= 0;i--){
+        while(_queue.length > 0){
+            var _node = _queue.splice(0,1)[0];
+            for(var i = _node.child.length-1 ;i >= 0;i--){
                 _queue.push(_node.child[i]);
             }
             callback(_node);

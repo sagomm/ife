@@ -4,7 +4,7 @@ app.init = function(){
   var view = new app.View(model);
   var controller = new app.Controller(model,view);
   try{
-      controller.init();
+    controller.init();
   }catch(e){
     console.log(e);
   }
@@ -38,13 +38,14 @@ app.Controller = function (model,view) {
 app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
-    var root = new Node(new app.domNode(document.getElementById('root'),document.getElementById('root').getElementsByTagName('span').innerHTML));
+    var root = new Node(new app.domNode(document.getElementById('root'),document.getElementById('root').getElementsByTagName('span')[0] .innerHTML));
     var This = this;
     this.model.setRoot(root);
     (function getNodes(_root){
-      for (var i = 0;i< _root.value.node.childNodes.length;i++){
+      // console.log(_root);
+      for (var i = 0;i< _root.value.node.childNodes.length-1;i++){
         if(_root.value.node.childNodes[i].nodeName === 'DIV'){
-          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span').innerHTML),_root);
+          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span')[0].innerHTML),_root);
           if(This.model.addNode(treeNode,_root)){
             getNodes(treeNode);
           }else{
@@ -70,10 +71,11 @@ app.Model.prototype = {
     return this.tree.addNode(treeNode,parentNode);
   },
   bs : function(){
+    var That = this;
     this.tree.BF(function (node) {
-      this.currentNode = node.value.node;
-      this.currentNodeChanged.notify(this.currentNode);
-    }.bind(this))
+      That.currentNode = node.value.node;
+      That.currentNodeChanged.notify(That.currentNode);
+    })
   },
   ds : function(){
     this.tree.DF(function(node){
@@ -94,18 +96,19 @@ app.Model.prototype = {
 }
 app.View = function (model) {
   this.model = model;
-  var This = this;
+  var That = this;
   this.model.currentNodeChanged.attach(function(){
-    this.showNode(this.model.currentNode.node);
-  }.bind(this));
+    That.showNode(That.model.currentNode.node);
+  });
 }
 app.View.prototype = {
     constructor : 'app.view',
     showNode : function(node){
+      console.log(node);
       var nodes = document.getElementById('root').getElementsByTagName('div');
-      for(var i = 0 ;i < nodes.length ; i++){
-        this.delAni(nodes[i]);
-      }
+      // for(var i = 0 ;i < nodes.length ; i++){
+      //   this.delAni(nodes[i]);
+      // }
       this.addAni(node);
     },
     addAni : function (node){
