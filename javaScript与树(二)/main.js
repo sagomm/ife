@@ -55,7 +55,7 @@ app.Controller.prototype = {
     })(root);
 
     this.model.bs();
-    console.log(this.model.currentNode);
+    console.log
   }
 }
 app.Model = function (){
@@ -79,9 +79,10 @@ app.Model.prototype = {
     })
   },
   ds : function(){
+    var That = this;
     this.tree.DF(function(node){
-      this.currentNode = node;
-      currentNodeChanged.notify(node);
+      That.currentNode = node.value.node;
+      That.currentNodeChanged.notify(That.currentNode);
     })
   },
   search : function(node){
@@ -99,21 +100,16 @@ app.View = function (model) {
   this.model = model;
   this.showQueue = [];
   var That = this;
+  // case 0 for 'stop' ,case 1 for 'run'
+  this.showStatu  = 0;
   this.model.currentNodeChanged.attach(function(model,node){
     That.showQueue.push(node);
   });
 }
 app.View.prototype = {
     constructor : 'app.view',
-    showNode : function(node){
-      var That = this;
-      setTimeout(function(){
-        if(showQueue.length != 0){
-          setTimeout(function(){
+    show : function(){
 
-          },10)
-        }
-      },10)
     },
     addAni : function (node){
         animation.addAni(node,'red');
@@ -121,4 +117,13 @@ app.View.prototype = {
     delAni : function (node) {
         animation.removeAni(node,'red');
     },
+    clearAllAni : function(){
+      if(this.showQueue){
+        for(var i in showQueue){
+          this.delAni(i);
+        }
+      }else{
+        throw('showQueue can not be empty');
+      }
+    }
 }
