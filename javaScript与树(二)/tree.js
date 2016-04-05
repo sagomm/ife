@@ -69,10 +69,10 @@ Tree.prototype.deleteNode = function (node,parent) {
 Tree.prototype.DF = function (callback) {
     (function _DF(root){
         if(root){
-            for(var i = 0;i < root.child.length-1;i++){
+            callback(root);
+            for(var i = 0;i < root.child.length;i++){
                 _DF(root.child[i]);
             }
-            callback(root);
         }
     })(this.root);
 }

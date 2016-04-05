@@ -54,7 +54,7 @@ app.Controller.prototype = {
     }
     })(root);
 
-    this.model.bs();
+    this.model.ds();
     this.view.show();
     console.log
   }
@@ -87,14 +87,14 @@ app.Model.prototype = {
     })
   },
   search : function(node){
-    var res = false;
     this.tree.DS = function(treeNode){
       this.currentNode = node;
       currentNodeChanged.notify(treeNode);
       if(treeNode === node){
-        res = true;
+        return true;
       }
     }
+    return false;
   }
 }
 app.View = function (model) {
@@ -119,9 +119,6 @@ app.View.prototype = {
                 console.log(i);
                 That.addAni(That.showQueue[i]);
                 _run(++i);
-            }else{
-              console.log('fd');
-              That.clearAllAni();
             }
           },300);
         })(0);
