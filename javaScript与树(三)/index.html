@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        .root{
+            height: 300px !important;
+            width: 1000px !important;
+
+        }
+        div{
+            border: 1px black solid;
+            display: flex;
+            padding: 5px;
+            justify-content: space-around;
+            align-items: center;
+            width: 30%;
+            height: 60%;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="root" class="root">
+    <span>A</span>
+    <div><span>B</span>
+        <div><span>C</span>
+            <div><span>D</span></div>
+            <div><span>E</span></div>
+        </div>
+        <div><span>F</span>
+            <div><span>G</span></div>
+            <div><span>H</span></div>
+        </div>
+    </div>
+    <div><span>I</span>
+        <div><span>J</span>
+            <div><span>K</span></div>
+            <div><span>L</span></div>
+        </div>
+        <div><span>M</span>
+            <div><span>N</span></div>
+            <div><span>O</span></div>
+        </div>
+    </div>
+    <div><span>P</span>
+        <div><span>Q</span></div>
+        <div><span>R</span></div>
+        <div><span>S</span></div>
+    </div>
+    <div><span>T</span>
+        <div><span>H</span></div>
+        <div><span>I</span></div>
+        <div><span>J</span></div>
+    </div>
+</div>
+
+<button class="BFT" id="BFT">深度优先遍历</button>
+<button class="DFT" id="DFT">宽度优先遍历</button>
+<button class="search" id="search">查找</button>
+<input id="text" type="text" placeholder="请输入查找的字符">
+
+<script src="tree.js"></script>
+<script src="animation.js"></script>
+<script src="main.js"></script>
+<script type="text/javascript">
+  app.init();
+</script>
+
+</body>
+
+</html>
