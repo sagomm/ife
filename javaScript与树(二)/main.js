@@ -53,10 +53,22 @@ app.Controller.prototype = {
         }
     }
     })(root);
-
-    this.model.ds();
-    this.view.show();
-    console.log
+    document.getElementById('BFT').onclick = function(){
+      This.model.bs();
+      This.view.show();
+    };
+    document.getElementById('DFT').onclick = function(){
+      This.model.ds();
+      This.view.show();
+    };
+    document.getElementById('search').onclick = function(){
+      if(document.getElementById('text').value){
+        This.model.search(document.getElementById('text').value);
+        This.view.show();
+      }else{
+        alert('i need value');
+      }
+    };
   }
 }
 app.Model = function (){
@@ -86,17 +98,22 @@ app.Model.prototype = {
       That.currentNodeChanged.notify(That.currentNode);
     })
   },
-  search : function(node){
-    this.tree.DS = function(treeNode){
-      this.currentNode = node;
-      currentNodeChanged.notify(treeNode);
-      if(treeNode === node){
-        return true;
-      }
-    }
-    return false;
+  search : function(value){
+    var That = this;
+    var isFind = false;
+    this.tree.DF(function(node){
+          That.currentNode = node.value.node;
+          console.log(node.value.value);
+          if(!isFind){
+            That.currentNodeChanged.notify(That.currentNode);
+            if(node.value.value === value){
+              isFind = true;
+            }
+        }
+      })
   }
 }
+
 app.View = function (model) {
   this.model = model;
   this.showQueue = [];
