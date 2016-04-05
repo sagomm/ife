@@ -82,7 +82,7 @@ Tree.prototype.BF = function (callback){
         _queue.push(this.root);
         while(_queue.length > 0){
             var _node = _queue.splice(0,1)[0];
-            for(var i = _node.child.length-1 ;i >= 0;i--){
+            for(var i = 0 ;i < _node.child.length;i++){
                 _queue.push(_node.child[i]);
             }
             callback(_node);

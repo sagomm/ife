@@ -55,6 +55,7 @@ app.Controller.prototype = {
     })(root);
 
     this.model.bs();
+    this.view.show();
     console.log
   }
 }
@@ -109,7 +110,24 @@ app.View = function (model) {
 app.View.prototype = {
     constructor : 'app.view',
     show : function(){
-
+      if(this.showQueue){
+        var That = this;
+        (function _run(i){
+          setTimeout(function(){
+            if(That.showQueue[i]){
+                That.clearAllAni();
+                console.log(i);
+                That.addAni(That.showQueue[i]);
+                _run(++i);
+            }else{
+              console.log('fd');
+              That.clearAllAni();
+            }
+          },300);
+        })(0);
+      }else{
+        throw('showQueue can not be empty');
+      }
     },
     addAni : function (node){
         animation.addAni(node,'red');
@@ -119,8 +137,8 @@ app.View.prototype = {
     },
     clearAllAni : function(){
       if(this.showQueue){
-        for(var i in showQueue){
-          this.delAni(i);
+        for(var i = 0 ;i < this.showQueue.length-1;i++){
+          this.delAni(this.showQueue[i]);
         }
       }else{
         throw('showQueue can not be empty');
