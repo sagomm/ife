@@ -1,6 +1,6 @@
 var app = {}
 app.init = function(){
-  var model = new app.Model();
+  var model = new app.Model(document.getElementById('root'));
   var view = new app.View(model);
   var controller = new app.Controller(model,view);
   try{
@@ -25,6 +25,7 @@ app.Event.prototype = {
     }
   }
 }
+
 app.domNode = function(node,value){
   this.node = node;
   this.value = value;
@@ -38,21 +39,7 @@ app.Controller = function (model,view) {
 app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
-    var root = new Node(new app.domNode(document.getElementById('root'),document.getElementById('root').getElementsByTagName('span')[0] .innerHTML));
-    var This = this;
-    this.model.setRoot(root);
-    (function getNodes(_root){
-      for (var i = 0;i< _root.value.node.childNodes.length-1;i++){
-        if(_root.value.node.childNodes[i].nodeName === 'DIV'){
-          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span')[0].innerHTML),_root);
-          if(This.model.addNode(treeNode,_root)){
-            getNodes(treeNode);
-          }else{
-            throw ('getNodes wrong');
-          };
-        }
-    }
-    })(root);
+
     document.getElementById('BFT').onclick = function(){
       This.view.showQueue.length = 0;
       This.model.bs();
@@ -74,10 +61,27 @@ app.Controller.prototype = {
     };
   }
 }
-app.Model = function (){
-    this.tree = new Tree();
-    this.currentNodeChanged = new app.Event(this);
-    this.currentNode  = null;
+app.Model = function (domNode){
+    var treeRoot = new Node(domNode);
+    /**
+     * 初始化model
+     */
+    var root = new Node(new app.domNode(document.getElementById('root'),document.getElementById('root').getElementsByTagName('span')[0] .innerHTML));
+    var This = this;
+    this.model.setRoot(root);
+    (function getNodes(_root){
+      for (var i = 0;i< _root.value.node.childNodes.length-1;i++){
+        if(_root.value.node.childNodes[i].nodeName === 'DIV'){
+          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span')[0].innerHTML),_root);
+          if(This.model.addNode(treeNode,_root)){
+            getNodes(treeNode);
+          }else{
+            throw ('getNodes wrong');
+          };
+        }
+    }
+    })(root);
+    this.tree = new Tree(new Node(domNode));
 }
 app.Model.prototype = {
   constructor : 'app.Model',
