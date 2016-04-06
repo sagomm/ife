@@ -1,13 +1,21 @@
 function Node(value,parent){
-    if(value && parent){
-      this.value = value;
+  if(typeof value != 'undefined'){
+    this.value = value;
+    if(this.isNode(parent)){
       this.parent = parent;
-      this.child = [];
     }else{
-      throw('');  
+      throw('node parent set error');
     }
+  }else{
+    throw('node value set error');
+  }
 }
 Node.prototype.constructor = 'Node';
+Node.prototype.isNode = function(node){
+  var constructor = node.constructor;
+  if(!constructor)return false;
+  if('Node' === constructor.name || 'Node' === constructor.displayName)return true;
+}
 Node.prototype.addChild = function (node) {
     if(node && (this.child.indexOf(node) == -1)){
         this.child.push(node);
