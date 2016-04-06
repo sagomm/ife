@@ -86,7 +86,7 @@ Tree.prototype.addNode = function (node,parent){
 }
 Tree.prototype.deleteNode = function (node) {
   if(this.isHasNode(node)){
-    return node.getParent().delChild(node);
+    return node.parent.delChild(node);
   }else{
     return false;
   }
@@ -103,16 +103,14 @@ Tree.prototype.DF = function (callback) {
 }
 Tree.prototype.BF = function (callback){
     var _queue = [];
-    if(this.root){
-        _queue.push(this.root);
-        while(_queue.length > 0){
-            var _node = _queue.splice(0,1)[0];
-            for(var i = 0 ;i < _node.childs.length;i++){
-                _queue.push(_node.childs[i]);
-            }
-            callback(_node);
+    _queue.push(this.root);
+    while(_queue.length > 0){
+        var _node = _queue.splice(0,1)[0];
+        for(var i = 0 ;i < _node.childs.length;i++){
+            _queue.push(_node.childs[i]);
         }
-    };
+        callback(_node);
+    }
 }
 Tree.prototype.getRoot = function () {
     return this.root;
