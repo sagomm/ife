@@ -3,11 +3,9 @@ function Node(value,parent){
     this.value = value;
     if(this.isNode(parent)){
       this.parent = parent;
-    }else{
-      throw('node parent set error');
     }
   }else{
-    throw('node value set error');
+    throw new Error('node value set error');
   }
 }
 Node.prototype.constructor = 'Node';
@@ -17,7 +15,7 @@ Node.prototype.isNode = function(node){
   if('Node' === constructor.name || 'Node' === constructor.displayName)return true;
 }
 Node.prototype.addChild = function (node) {
-    if(node && (this.child.indexOf(node) == -1)){
+    if(isNode(node) && (this.child.indexOf(node) == -1)){
         this.child.push(node);
     }else{
         return false;
@@ -27,16 +25,16 @@ Node.prototype.findChild = function (child){
     return this.child.indexOf(child) || false;
 }
 Node.prototype.getParent = function () {
-    return this.parent || false;
+    return this.parent || null;
 }
 Node.prototype.getChilds = function(){
     return this.child;
 }
 
 
-function Tree(node){
-    this.root = node;
-    this.total = 0;
+function Tree(value){
+      this.root = new Node(value);
+      this.total = 0;
 }
 Tree.prototype.constructor = 'Tree';
 Tree.prototype.findNode = function (node,callback) {
