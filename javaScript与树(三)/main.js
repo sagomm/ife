@@ -1,13 +1,13 @@
 var app = {}
 app.init = function(){
-  var model = new app.Model(document.getElementById('root'));
-  var view = new app.View(model);
-  var controller = new app.Controller(model,view);
-  try{
-    controller.init();
-  }catch(e){
-    console.log(e);
-  }
+  var model = new app.Model();
+  // var view = new app.View(model);
+  // var controller = new app.Controller(model,view);
+  // try{
+  //   controller.init();
+  // }catch(e){
+  //   console.log(e);
+  // }
 }
 
 app.Event = function (observer){
@@ -40,80 +40,71 @@ app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
 
-    document.getElementById('BFT').onclick = function(){
-      This.view.showQueue.length = 0;
-      This.model.bs();
-      This.view.show();
-    };
-    document.getElementById('DFT').onclick = function(){
-      This.view.showQueue.length = 0;
-      This.model.ds();
-      This.view.show();
-    };
-    document.getElementById('search').onclick = function(){
-      This.view.showQueue.length = 0;
-      if(document.getElementById('text').value){
-        This.model.search(document.getElementById('text').value);
-        This.view.show();
-      }else{
-        alert('i need value');
-      }
-    };
+    // document.getElementById('BFT').onclick = function(){
+    //   This.view.showQueue.length = 0;
+    //   This.model.bs();
+    //   This.view.show();
+    // };
+    // document.getElementById('DFT').onclick = function(){
+    //   This.view.showQueue.length = 0;
+    //   This.model.ds();
+    //   This.view.show();
+    // };
+    // document.getElementById('search').onclick = function(){
+    //   This.view.showQueue.length = 0;
+    //   if(document.getElementById('text').value){
+    //     This.model.search(document.getElementById('text').value);
+    //     This.view.show();
+    //   }else{
+    //     alert('i need value');
+    //   }
+    // };
   }
 }
-app.Model = function (domNode){
-    var treeRoot = new Node(domNode);
+app.Model = function (){
     /**
      * 初始化model
      */
-    var root = new Node(new app.domNode(document.getElementById('root'),document.getElementById('root').getElementsByTagName('span')[0] .innerHTML));
-    var This = this;
-    this.model.setRoot(root);
+    var root = new Node(document.getElementById('root'));
     (function getNodes(_root){
-      for (var i = 0;i< _root.value.node.childNodes.length-1;i++){
-        if(_root.value.node.childNodes[i].nodeName === 'DIV'){
-          var treeNode = new Node(new app.domNode(_root.value.node.childNodes[i],_root.value.node.childNodes[i].getElementsByTagName('span')[0].innerHTML),_root);
-          if(This.model.addNode(treeNode,_root)){
-            getNodes(treeNode);
-          }else{
-            throw ('getNodes wrong');
-          };
+      for (var i = 0;i< _root.value.childNodes.length ; i++){
+        if(_root.value.childNodes[i].nodeName === 'DIV'){
+          if(!_root.addChild(new Node(_root.value.childNodes[i],_root))){
+            throw('Model getNodes error');
+          }
         }
-    }
+      }
+      for(var i in _root.getChilds()){
+        getNodes();
+      }
     })(root);
-    this.tree = new Tree(new Node(domNode));
+    /**
+     * 建立dom树
+     */
+    this.tree = new Tree(root);
+    this.currentNodeChanged = new app.Event(this);
 }
 app.Model.prototype = {
   constructor : 'app.Model',
-  setRoot : function(treeNode){
-    this.tree.setRoot(treeNode);
-  },
-  addNode : function(treeNode,parentNode){
-    return this.tree.addNode(treeNode,parentNode);
-  },
   bs : function(){
     var That = this;
-    this.tree.BF(function (node) {
-      That.currentNode = node.value.node;
-      That.currentNodeChanged.notify(That.currentNode);
+    this.tree.BF(function (treeNode) {
+      That.currentNodeChanged.notify(node.value);
     })
   },
   ds : function(){
     var That = this;
-    this.tree.DF(function(node){
-      That.currentNode = node.value.node;
-      That.currentNodeChanged.notify(That.currentNode);
+    this.tree.DF(function(treeNode){
+      That.currentNodeChanged.notify(node.value);
     })
   },
-  search : function(value){
+  searchValue : function(value){
     var That = this;
     var isFind = false;
-    this.tree.DF(function(node){
-          That.currentNode = node.value.node;
-          console.log(node.value.value);
+    this.tree.DF(function(treeNode){
           if(!isFind){
-            That.currentNodeChanged.notify(That.currentNode);
-            if(node.value.value === value){
+            That.currentNodeChanged.notify(treeNode.value);
+            if(treeNode.value.getElementsByTagName('span').innerHTML === value){
               isFind = true;
             }
         }

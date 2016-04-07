@@ -19,7 +19,8 @@ Node.prototype.isNode = function(node){
   }
 }
 Node.prototype.addChild = function (node) {
-      if(isHasNode(node)){
+  console.log(this.isHasChild(node));
+      if(!this.isHasChild(node)){
         this.childs.push(node);
         return true;
       }else{
@@ -41,6 +42,8 @@ Node.prototype.isHasChild = function (node){
         return true;
       }
     }
+    return false;
+  }else{
     return false;
   }
 }
@@ -77,7 +80,7 @@ Tree.prototype.isHasNode = function(node){
   return res;
 }
 Tree.prototype.addNode = function (node,parent){
-  if(isNode(node) && this.isHasNode(parent))
+  if(isNode(node) && this.isHasNode(parent)){
     node.parent = parent;
     return parent.addChild(parent);
   }else {
