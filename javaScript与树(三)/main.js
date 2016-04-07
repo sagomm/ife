@@ -63,26 +63,35 @@ app.Controller.prototype = {
 }
 app.Model = function (){
     /**
-     * 初始化model
+     * 初始化model,建立dom树
      */
     var root = new Node(document.getElementById('root'));
     (function getNodes(_root){
       for (var i = 0;i< _root.value.childNodes.length ; i++){
         if(_root.value.childNodes[i].nodeName === 'DIV'){
+          console.log(_root.value.childNodes[i]);
           if(!_root.addChild(new Node(_root.value.childNodes[i],_root))){
             throw('Model getNodes error');
           }
         }
       }
       for(var i in _root.getChilds()){
-        getNodes();
+        getNodes(_root.getChilds()[i]);
       }
     })(root);
-    /**
-     * 建立dom树
-     */
     this.tree = new Tree(root);
+    /**
+     * 发布当前节点改变事件
+     */
     this.currentNodeChanged = new app.Event(this);
+    /**
+     * 发布删除节点事件
+     */
+    this.currentNodeDeleted = new app.Event(this);
+    /**
+     * 发布添加节点时间
+     */
+    this.addNewNode = new app.Event(this);
 }
 app.Model.prototype = {
   constructor : 'app.Model',

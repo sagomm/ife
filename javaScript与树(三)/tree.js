@@ -19,7 +19,8 @@ Node.prototype.isNode = function(node){
   }
 }
 Node.prototype.addChild = function (node) {
-  console.log(this.isHasChild(node));
+      console.log(this.isHasChild(node));
+      console.log(this);
       if(!this.isHasChild(node)){
         this.childs.push(node);
         return true;
