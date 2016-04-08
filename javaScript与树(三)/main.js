@@ -97,7 +97,6 @@ app.Model.prototype = {
   bs : function(){
     var That = this;
     this.tree.BF(function (treeNode) {
-      console.log(1);
       That.currentItemChanged.notify(treeNode.value);
     })
   },
@@ -143,6 +142,14 @@ app.View = function (model) {
    * 节点改变缓冲区，用于动画显示
    */
   this.showQueue = [];
+  var animation = setInterval(function(){
+    if(That.showQueue.length != 0){
+      That.clearAllAni();
+      That.addAni(That.showQueue.splice(0,1)[0]);
+    }else{
+      That.clearAllAni();
+    }
+  },300);
   /**
    * 视图层状态
    */
@@ -178,12 +185,9 @@ app.View.prototype = {
         animation.removeAni(node,'red');
     },
     clearAllAni : function(){
-      if(this.showQueue){
-        for(var i = 0 ;i < this.showQueue.length-1;i++){
-          this.delAni(this.showQueue[i]);
+        var allNodes = document.getElementsByTagName('div');
+        for(var i = 0 ; i < allNodes.length ; i++ ){
+          this.delAni(allNodes[i]);
         }
-      }else{
-        throw('showQueue can not be empty');
-      }
     }
 }
