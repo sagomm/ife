@@ -1,13 +1,13 @@
 var app = {}
 app.init = function(){
   var model = new app.Model();
-  // var view = new app.View(model);
-  // var controller = new app.Controller(model,view);
-  // try{
-  //   controller.init();
-  // }catch(e){
-  //   console.log(e);
-  // }
+  var view = new app.View(model);
+  var controller = new app.Controller(model,view);
+  try{
+    controller.init();
+  }catch(e){
+    console.log(e);
+  }
 }
 
 app.Event = function (observer){
@@ -39,7 +39,7 @@ app.Controller = function (model,view) {
 app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
-
+    this.model.bs();
     // document.getElementById('BFT').onclick = function(){
     //   This.view.showQueue.length = 0;
     //   This.model.bs();
@@ -97,13 +97,14 @@ app.Model.prototype = {
   bs : function(){
     var That = this;
     this.tree.BF(function (treeNode) {
-      That.currentNodeChanged.notify(treeNode.value);
+      console.log(1);
+      That.currentItemChanged.notify(treeNode.value);
     })
   },
   ds : function(){
     var That = this;
     this.tree.DF(function(treeNode){
-      That.currentNodeChanged.notify(node.value);
+      That.currentItemChanged.notify(treeNode.value);
     })
   },
   searchValue : function(value){
@@ -137,6 +138,7 @@ app.Model.prototype = {
 
 app.View = function (model) {
   this.model = model;
+  var That = this;
   /**
    * 节点改变缓冲区，用于动画显示
    */
@@ -149,13 +151,13 @@ app.View = function (model) {
    * 绑定模型层焦点节点改变
    */
   this.model.currentItemChanged.attach(function(model,item){
-     this.show(item);
+    That.show(item);
   });
   /**
    * 绑定模型层删除节点
    */
   this.model.currentItemDeleted.attach(function(model,item){
-    
+
   });
   /**
    * 绑定模型层添加新节点
@@ -166,11 +168,8 @@ app.View = function (model) {
 }
 app.View.prototype = {
     constructor : 'app.view',
-    /**
-     * dom显示动画缓冲
-     */
     show : function(item){
-
+        this.showQueue.push(item);
     },
     addAni : function (node){
         animation.addAni(node,'red');
