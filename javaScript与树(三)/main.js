@@ -69,8 +69,7 @@ app.Model = function (){
     (function getNodes(_root){
       for (var i = 0;i< _root.value.childNodes.length ; i++){
         if(_root.value.childNodes[i].nodeName === 'DIV'){
-          console.log(_root.value.childNodes[i]);
-          if(!_root.addChild(new Node(_root.value.childNodes[i],_root))){
+          if(!_root.addChild(new Node(_root.value.childNodes[i]))){
             throw('Model getNodes error');
           }
         }
@@ -83,22 +82,22 @@ app.Model = function (){
     /**
      * 发布当前节点改变事件
      */
-    this.currentNodeChanged = new app.Event(this);
+    this.currentItemChanged = new app.Event(this);
     /**
      * 发布删除节点事件
      */
-    this.currentNodeDeleted = new app.Event(this);
+    this.currentItemDeleted = new app.Event(this);
     /**
-     * 发布添加节点时间
+     * 发布添加节点事件
      */
-    this.addNewNode = new app.Event(this);
+    this.addNewItem = new app.Event(this);
 }
 app.Model.prototype = {
   constructor : 'app.Model',
   bs : function(){
     var That = this;
     this.tree.BF(function (treeNode) {
-      That.currentNodeChanged.notify(node.value);
+      That.currentNodeChanged.notify(treeNode.value);
     })
   },
   ds : function(){
@@ -118,17 +117,46 @@ app.Model.prototype = {
             }
         }
       })
+    return isFind;
+  },
+  delItem : function(node){
+    if(this.tree.deleteNode(node)){
+      this.currentItemDeleted.notify(node);
+    }else{
+      return false;
+    }
+  },
+  addItem : function(node,parent){
+    if(this.tree.addNode(node,parent)){
+      this.addNewItem.notify(node);
+    }else{
+      return false;
+    }
   }
 }
 
 app.View = function (model) {
   this.model = model;
-  this.showQueue = [];
-  var That = this;
-  // case 0 for 'stop' ,case 1 for 'run'
-  this.showStatu  = 0;
-  this.model.currentNodeChanged.attach(function(model,node){
-    That.showQueue.push(node);
+  /**
+   * 绑定模型层焦点节点改变
+   */
+  this.model.currentItemChanged.attach(function(model,item){
+    /**
+     * dom显示动画缓冲
+     */
+     
+  });
+  /**
+   * 绑定模型层删除节点
+   */
+  this.model.currentItemDeleted.attach(function(model,item){
+
+  });
+  /**
+   * 绑定模型层添加新节点
+   */
+  this.model.addNewItem.attach(function(model,item){
+
   });
 }
 app.View.prototype = {

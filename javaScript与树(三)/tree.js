@@ -3,6 +3,7 @@ function Node(value,parentNode){
     this.value = value;
     this.childs = [];
     if(this.isNode(parentNode)){
+      console.log(this);
       this.parent = parentNode;
       this.parent.addChild(this);
     }
