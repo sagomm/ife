@@ -142,14 +142,6 @@ app.View = function (model) {
    * 节点改变缓冲区，用于动画显示
    */
   this.showQueue = [];
-  var animation = setInterval(function(){
-    if(That.showQueue.length != 0){
-      That.clearAllAni();
-      That.addAni(That.showQueue.splice(0,1)[0]);
-    }else{
-      That.clearAllAni();
-    }
-  },300);
   /**
    * 视图层状态
    */
@@ -161,13 +153,13 @@ app.View = function (model) {
     That.show(item);
   });
   /**
-   * 绑定模型层删除节点
+   * 绑定模型层删除节点事件
    */
   this.model.currentItemDeleted.attach(function(model,item){
 
   });
   /**
-   * 绑定模型层添加新节点
+   * 绑定模型层添加新节点事件
    */
   this.model.addNewItem.attach(function(model,item){
 
@@ -176,7 +168,19 @@ app.View = function (model) {
 app.View.prototype = {
     constructor : 'app.view',
     show : function(item){
-        this.showQueue.push(item);
+        if(this.showQueue.length != 0){
+            this.showQueue.push(item);
+        }else{
+          var animation = setInterval(function(){
+            if(this.showQueue.length != 0){
+              this.clearAllAni();
+              this.addAni(That.showQueue.splice(0,1)[0]);
+            }else{
+              this.clearAllAni();
+              clearInterval(animation);
+            }
+          }.bind(this),300);
+        }
     },
     addAni : function (node){
         animation.addAni(node,'red');
