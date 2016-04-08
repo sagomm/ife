@@ -138,19 +138,24 @@ app.Model.prototype = {
 app.View = function (model) {
   this.model = model;
   /**
+   * 节点改变缓冲区，用于动画显示
+   */
+  this.showQueue = [];
+  /**
+   * 视图层状态
+   */
+  this.status = ['run','static'];
+  /**
    * 绑定模型层焦点节点改变
    */
   this.model.currentItemChanged.attach(function(model,item){
-    /**
-     * dom显示动画缓冲
-     */
-     
+     this.show(item);
   });
   /**
    * 绑定模型层删除节点
    */
   this.model.currentItemDeleted.attach(function(model,item){
-
+    
   });
   /**
    * 绑定模型层添加新节点
@@ -161,22 +166,11 @@ app.View = function (model) {
 }
 app.View.prototype = {
     constructor : 'app.view',
-    show : function(){
-      if(this.showQueue){
-        var That = this;
-        (function _run(i){
-          setTimeout(function(){
-            if(That.showQueue[i]){
-                That.clearAllAni();
-                console.log(i);
-                That.addAni(That.showQueue[i]);
-                _run(++i);
-            }
-          },300);
-        })(0);
-      }else{
-        throw('showQueue can not be empty');
-      }
+    /**
+     * dom显示动画缓冲
+     */
+    show : function(item){
+
     },
     addAni : function (node){
         animation.addAni(node,'red');
