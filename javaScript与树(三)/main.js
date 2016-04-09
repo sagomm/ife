@@ -136,12 +136,6 @@ app.View = function (model) {
    * 节点改变队列，用于动画显示
    */
   this.showQueue = [];
-  this.animation = setInterval(function(){
-    this.clearAllAni();
-    if(this.showQueue.length != 0){
-      this.addAni(That.showQueue.splice(0,1)[0]);
-    }
-  }.bind(this),300);
   /**
    * 视图层状态 ture ==> run , false ==> static
    */
@@ -168,7 +162,17 @@ app.View = function (model) {
 app.View.prototype = {
     constructor : 'app.view',
     show : function(item){
-      this.showQueue.push(item);
+      if(this.statu){
+        this.animation = setInterval(function(){
+          this.clearAllAni();
+          if(this.showQueue.length != 0 && this.statu){
+            this.addAni(this.showQueue.splice(0,1)[0]);
+          }
+        }.bind(this),300);
+      }else{
+        this.showQueue.push(item);
+        this.statu = true;
+      }
     },
     addAni : function (node){
         animation.addAni(node,'red');
