@@ -39,26 +39,19 @@ app.Controller = function (model,view) {
 app.Controller.prototype = {
   constructor : 'app.Controller',
   init : function(){
-    this.model.bs();
-    // document.getElementById('BFT').onclick = function(){
-    //   This.view.showQueue.length = 0;
-    //   This.model.bs();
-    //   This.view.show();
-    // };
-    // document.getElementById('DFT').onclick = function(){
-    //   This.view.showQueue.length = 0;
-    //   This.model.ds();
-    //   This.view.show();
-    // };
-    // document.getElementById('search').onclick = function(){
-    //   This.view.showQueue.length = 0;
-    //   if(document.getElementById('text').value){
-    //     This.model.search(document.getElementById('text').value);
-    //     This.view.show();
-    //   }else{
-    //     alert('i need value');
-    //   }
-    // };
+    var That = this;
+    /**
+     * 监听用户操作，宽搜，深搜，查找
+     */
+    document.getElementById('BFT').onclick = function(){
+      That.model.bs();
+    };
+    document.getElementById('DFT').onclick = function(){
+      That.model.ds();
+    };
+    document.getElementById('search').onclick = function(){
+
+    };
   }
 }
 app.Model = function (){
@@ -139,7 +132,7 @@ app.View = function (model) {
   this.model = model;
   var That = this;
   /**
-   * 节点改变缓冲区，用于动画显示
+   * 节点改变队列，用于动画显示
    */
   this.showQueue = [];
   /**
@@ -156,13 +149,13 @@ app.View = function (model) {
    * 绑定模型层删除节点事件
    */
   this.model.currentItemDeleted.attach(function(model,item){
-
+    That.delateItem(item);
   });
   /**
    * 绑定模型层添加新节点事件
    */
   this.model.addNewItem.attach(function(model,item){
-
+    That.addNewItem(model,Item);
   });
 }
 app.View.prototype = {
@@ -182,6 +175,7 @@ app.View.prototype = {
           }.bind(this),300);
         }
     },
+
     addAni : function (node){
         animation.addAni(node,'red');
     },
