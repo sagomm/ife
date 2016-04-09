@@ -73,10 +73,15 @@ app.Model = function (){
       }
     })(root);
     this.tree = new Tree(root);
+    this.focusNode = null;
     /**
-     * 发布当前节点改变事件
+     * 发布当前遍历节点改变事件
      */
     this.currentItemChanged = new app.Event(this);
+    /**
+     * 发布当前焦点节点改变事件
+     */
+    this.focusItemChanged = new app.Event(this);
     /**
      * 发布删除节点事件
      */
@@ -113,6 +118,9 @@ app.Model.prototype = {
       })
     return isFind;
   },
+  focusItem : function(node){
+    
+  }
   delItem : function(node){
     if(this.tree.deleteNode(node)){
       this.currentItemDeleted.notify(node);
@@ -141,10 +149,13 @@ app.View = function (model) {
    */
   this.statu = false;
   /**
-   * 绑定模型层焦点节点改变
+   * 绑定模型层节点改变
    */
   this.model.currentItemChanged.attach(function(model,item){
     That.show(item);
+  });
+  this.model.focusItemChanged.attach(function(model,item){
+    That.focus(item);
   });
   /**
    * 绑定模型层删除节点事件
@@ -173,6 +184,11 @@ app.View.prototype = {
         this.showQueue.push(item);
         this.statu = true;
       }
+    },
+    focus : function(item){
+      clearAllAni();
+      this.statu = false;
+      addAni(item);
     },
     addAni : function (node){
         animation.addAni(node,'red');
