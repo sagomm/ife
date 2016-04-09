@@ -45,6 +45,7 @@ app.Controller.prototype = {
      */
     document.getElementById('BFT').onclick = function(){
       That.model.bs();
+    console.log(1);
     };
     document.getElementById('DFT').onclick = function(){
       That.model.ds();
@@ -135,10 +136,16 @@ app.View = function (model) {
    * 节点改变队列，用于动画显示
    */
   this.showQueue = [];
+  this.animation = setInterval(function(){
+    this.clearAllAni();
+    if(this.showQueue.length != 0){
+      this.addAni(That.showQueue.splice(0,1)[0]);
+    }
+  }.bind(this),300);
   /**
-   * 视图层状态
+   * 视图层状态 ture ==> run , false ==> static
    */
-  this.status = ['run','static'];
+  this.statu = false;
   /**
    * 绑定模型层焦点节点改变
    */
@@ -161,21 +168,8 @@ app.View = function (model) {
 app.View.prototype = {
     constructor : 'app.view',
     show : function(item){
-        if(this.showQueue.length != 0){
-            this.showQueue.push(item);
-        }else{
-          var animation = setInterval(function(){
-            if(this.showQueue.length != 0){
-              this.clearAllAni();
-              this.addAni(That.showQueue.splice(0,1)[0]);
-            }else{
-              this.clearAllAni();
-              clearInterval(animation);
-            }
-          }.bind(this),300);
-        }
+      this.showQueue.push(item);
     },
-
     addAni : function (node){
         animation.addAni(node,'red');
     },
