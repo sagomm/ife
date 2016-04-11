@@ -1,9 +1,8 @@
 var page = {}
-
 /**
  * 绘制背景
  */
-page.drowBackground = function(canvas){
+page.drowBackground = function(canvas,box){
   var ctx = canvas.getContext("2d");
   ctx.strokeStyle = '#ccc';
   ctx.beginPath();
@@ -22,18 +21,8 @@ page.drowBackground = function(canvas){
      ctx.stroke();
   }
   ctx.closePath();
+  box.drowBox();
 }
 /**
  * 画小方块
  */
-page.box = function(canvas,x,y){
-  if(0>x && x<500 && y>0 && y<500){
-      var ctx = canvas.getContext("2d");
-
-  }else{
-    throw('box x , y error');
-  }
-}
-page.box = {
-  
-}
