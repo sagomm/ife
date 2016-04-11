@@ -6,10 +6,12 @@
 </head>
 <body>
   <canvas id="background" width="500px" height="500px" style="border:1px solid black;"></canvas>
-  <script type="text/javascript" src="js/init.js"></script>
+  <canvas id="box" width="50" height="50" style="border:1px solid black;display:none;"></canvas>
+  <input type="text" name="name" placeholder="请输入指令..">
+  <button type="button" name="button">执行</button>
+  <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript">
-    var canvas = document.getElementById('background');
-    page.drowBackground(canvas);
+    page.init();
   </script>
 </body>
 </html>

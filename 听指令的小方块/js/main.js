@@ -1,8 +1,23 @@
 var page = {}
+page.init = function(){
+  /**
+   * 页面布局初始化
+   */
+  var background = document.getElementById('background');
+  var box = document.getElementById('box');
+  page.drowBackground(background);
+  page.drowBox(box,'UP');
+  page.addBox(background,box);
+  /**
+   * 更改方块的位置
+   */
+  page.changeBox();
+}
+
 /**
  * 绘制背景
  */
-page.drowBackground = function(canvas,box){
+page.drowBackground = function(canvas){
   var ctx = canvas.getContext("2d");
   ctx.strokeStyle = '#ccc';
   ctx.beginPath();
@@ -21,8 +36,42 @@ page.drowBackground = function(canvas,box){
      ctx.stroke();
   }
   ctx.closePath();
-  box.drowBox();
 }
 /**
  * 画小方块
  */
+page.drowBox = function(canvas,statu){
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = 'red';
+  ctx.fillRect(0,0,50,50);
+  ctx.fillStyle = 'blue';
+  switch (statu) {
+    case 'LEF':
+      ctx.fillRect(0,0,15,50);
+      break;
+    case 'RIG':
+      ctx.fillRect(35,0,15,30);
+      break;
+    case 'UP' :
+      ctx.fillRect(0, 0, 50, 15);
+      break;
+    case 'DOWN' :
+      ctx.fillRect(0, 35, 50, 15);
+      break;
+    default:
+      break;
+  }
+}
+/**
+ * 将小方块添加到背景中
+ */
+page.addBox = function(background,box){
+  var ctx = background.getContext("2d");
+  ctx.drawImage(box, 0, 0);
+}
+/**
+ * 改变小方块的状态与位置
+ */
+ page.boxChange(x,y,statu){
+   
+ }
