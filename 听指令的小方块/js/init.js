@@ -27,5 +27,13 @@ page.drowBackground = function(canvas){
  * 画小方块
  */
 page.box = function(canvas,x,y){
+  if(0>x && x<500 && y>0 && y<500){
+      var ctx = canvas.getContext("2d");
 
+  }else{
+    throw('box x , y error');
+  }
+}
+page.box = {
+  
 }
